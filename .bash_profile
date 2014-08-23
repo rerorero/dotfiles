@@ -16,12 +16,11 @@ alias ls="ls -G -w -a"
 alias la="ls -a"
 alias lf="ls -F"
 alias ll="ls -al"
+alias vi="vim"
 
 # rbenv
 eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/bin:$PATH"
-
-export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:"
+export PATH="$HOME/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 export PATH="$PATH:/usr/local/apache-maven-3.2.1/bin:"
 export PATH="$PATH:/Library/PostgreSQL/9.3/bin:"
 export PATH="$PATH:/Users/nato/tools/play/play-2.2.1:"

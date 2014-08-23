@@ -1,0 +1,111 @@
+
+:set paste
+
+
+"---------------------------
+" Start Neobundle Settings.
+"---------------------------
+" bundleで管理するディレクトリを指定
+set runtimepath+=~/.vim/bundle/neobundle.vim/
+ 
+" Required:
+call neobundle#begin(expand('~/.vim/bundle/'))
+ 
+" neobundle自体をneobundleで管理
+NeoBundleFetch 'Shougo/neobundle.vim'
+ 
+" 今後このあたりに追加のプラグインをどんどん書いて行きます！！"
+NeoBundle "ctrlpvim/ctrlp.vim"
+NeoBundle 'gcmt/wildfire.vim'
+NeoBundle 'Shougo/neocomplcache'
+
+call neobundle#end()
+ 
+" Required:
+filetype plugin indent on
+ 
+" 未インストールのプラグインがある場合、インストールするかどうかを尋ねてくれるようにする設定
+" 毎回聞かれると邪魔な場合もあるので、この設定は任意です。
+NeoBundleCheck
+ 
+"-------------------------
+" End Neobundle Settings.
+"-------------------------
+
+"------------------------------
+" オートコンプリート
+"------------------------------
+setlocal omnifunc=syntaxcomplete#Complete
+
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+" Define dictionary.
+let g:neocomplcache_dictionary_filetype_lists = {
+    \ 'default' : ''
+    \ }
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplcache#undo_completion()
+inoremap <expr><C-l>     neocomplcache#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplcache#smart_close_popup() . "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+
+
+"<TAB>で補完 " {{{ Autocompletion using the TAB key "This function determines, wether we are on the start of the line text (then "tab indents) or " if we want to try autocompletion function! InsertTabWrapper() let col = col('.') - 1
+if !col || getline('.')[col - 1] !~ '\k'
+return "\<TAB>"
+else
+if pumvisible()
+return "\<C-N>"
+else
+return "\<C-N>\<C-P>"
+end
+endif
+endfunction
+" Remap the tab key to select action with InsertTabWrapper
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+" }}} Autocompletion using the TAB key
+
+inoremap <expr> <CR> pumvisible() ? "\<C-Y>\<CR>" : "\<CR>"
+autocmd FileType php :set dictionary=~/.vim/dict/php.dict
+
+" popup color
+hi Pmenu ctermbg=5
+hi PmenuSel ctermbg=4
+hi PmenuSbar ctermbg=2
+hi PmenuThumb ctermfg=3
+
+" dictionary
+autocmd FileType php :set dictionary=~/.vim/dict/php.dict
+autocmd FileType c :set dictionary=~/.vim/dict/php.dict
+autocmd FileType cpp :set dictionary=~/.vim/dict/c.dict
+autocmd FileType cc :set dictionary=~/.vim/dict/cpp.dict
+
+"------------------------------
+" オートコンプリート end
+"------------------------------
+
+
+nnoremap ; :
+nnoremap : ;
+
