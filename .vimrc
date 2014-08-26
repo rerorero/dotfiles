@@ -262,8 +262,6 @@ let g:clever_f_smart_case = 1
 """"""""""""""""""""""""""""""
 " easy motion
 """"""""""""""""""""""""""""""
-let g:EasyMotion_leader_key = '<Space><Space>'
-let g:EasyMotion_keys = 'fjdkslaureiwoqpvncm'
 
 noremap ; :
 noremap : ;
