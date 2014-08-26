@@ -34,6 +34,8 @@ NeoBundle 'tomtom/tcomment_vim'
 NeoBundle "ctrlpvim/ctrlp.vim"
 NeoBundle 'gcmt/wildfire.vim'
 NeoBundle "Shougo/neocomplete.vim"
+NeoBundle 'rhysd/clever-f.vim'
+NeoBundle 'Lokaltog/vim-easymotion'
 
 call neobundle#end()
 
@@ -67,14 +69,15 @@ set list
 set listchars=tab:»-,eol:↲,extends:»,precedes:«,nbsp:%
 set whichwrap=b,s,h,l,<,>,[,]
 set showmatch
+set noignorecase
 set smartcase
 set nowrapscan
 set grepprg=grep\ -nH
+set paste
 
-noremap :tree :NERDTree
 
 " ctaagsでタグジャンプ時に新しいタブで開く
-nnoremap s] <C-w><C-]><C-w>T
+nnoremap s] <C-w>g<C-]><C-w>T
 nnoremap s} <C-w>]
 
 " mac用カーソル移動
@@ -250,10 +253,22 @@ let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 
 
+""""""""""""""""""""""""""""""
+" clever-f
+""""""""""""""""""""""""""""""
+let g:clever_f_smart_case = 1
 
 
-
+""""""""""""""""""""""""""""""
+" easy motion
+""""""""""""""""""""""""""""""
+let g:EasyMotion_leader_key = '<Space><Space>'
+let g:EasyMotion_keys = 'fjdkslaureiwoqpvncm'
 
 noremap ; :
 noremap : ;
+
+" 隠しファイルをデフォルトで表示させる
+let NERDTreeShowHidden = 1
+nnoremap <C-f> :NERDTree<CR>
 
