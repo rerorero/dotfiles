@@ -36,6 +36,7 @@ NeoBundle 'gcmt/wildfire.vim'
 NeoBundle "Shougo/neocomplete.vim"
 NeoBundle 'rhysd/clever-f.vim'
 NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'surround.vim'
 
 call neobundle#end()
 
