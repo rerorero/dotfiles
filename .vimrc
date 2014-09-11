@@ -28,15 +28,15 @@ NeoBundle 'Shougo/vimproc.vim', {
       \    },
       \ }
 NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'Townk/vim-autoclose'
-NeoBundle 'kana/vim-submode' 
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle "ctrlpvim/ctrlp.vim"
 NeoBundle 'gcmt/wildfire.vim'
 NeoBundle "Shougo/neocomplete.vim"
 NeoBundle 'rhysd/clever-f.vim'
-NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'surround.vim'
+
+NeoBundle 'thinca/vim-ref'
+NeoBundle 'kana/vim-submode' 
 
 call neobundle#end()
 
@@ -74,7 +74,6 @@ set noignorecase
 set smartcase
 set nowrapscan
 set grepprg=grep\ -nH
-set paste
 
 
 " ctaagsでタグジャンプ時に新しいタブで開く
@@ -261,8 +260,10 @@ let g:clever_f_smart_case = 1
 
 
 """"""""""""""""""""""""""""""
-" easy motion
+" vim-ref
 """"""""""""""""""""""""""""""
+let g:ref_cache_dir=$HOME.'/.vim/vim-ref/cache'
+let g:ref_phmanual_path=$HOME.'/.vim/vim-ref/php-chunked-xhtml'
 
 noremap ; :
 noremap : ;
