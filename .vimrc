@@ -37,6 +37,8 @@ NeoBundle "Shougo/neocomplete.vim"
 NeoBundle 'rhysd/clever-f.vim'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'surround.vim'
+NeoBundle 'PDV--phpDocumentor-for-Vim'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 
 call neobundle#end()
 
@@ -64,8 +66,8 @@ set shiftwidth=4
 set tabstop=4
 set expandtab
 set smarttab
-set autoindent
 set smartindent
+set autoindent
 set list
 set listchars=tab:»-,eol:↲,extends:»,precedes:«,nbsp:%
 set whichwrap=b,s,h,l,<,>,[,]
@@ -253,6 +255,12 @@ endif
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 
+""""""""""""""""""""""""""""""
+" phpDocumenter
+""""""""""""""""""""""""""""""
+inoremap <C-C> <ESC>:call PhpDocSingle()<CR>i
+nnoremap <C-C> :call PhpDocSingle()<CR>
+vnoremap <C-C> :call PhpDocRange()<CR
 
 """"""""""""""""""""""""""""""
 " clever-f
@@ -261,8 +269,30 @@ let g:clever_f_smart_case = 1
 
 
 """"""""""""""""""""""""""""""
-" easy motion
+" auto closing brackets
 """"""""""""""""""""""""""""""
+inoremap { {}<LEFT>
+inoremap [ []<LEFT>
+inoremap ( ()<LEFT>
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
+vnoremap { "zdi{<C-R>z}<ESC>
+vnoremap [ "zdi[<C-R>z]<ESC>
+vnoremap ( "zdi(<C-R>z)<ESC>
+vnoremap " "zdi"<C-R>z"<ESC>
+vnoremap ' "zdi'<C-R>z'<ESC>
+
+""""""""""""""""""""""""""""""
+" vim intent guide
+""""""""""""""""""""""""""""""
+let g:indent_guides_auto_colors=0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#262626 ctermbg=16
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3c3c3c ctermbg=235
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_start_level=2
+let g:indent_guides_guide_size=1
+let g:indent_guides_color_change_percent = 30
+
 
 noremap ; :
 noremap : ;

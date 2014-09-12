@@ -15,7 +15,7 @@ alias grep='grep --color'
 alias ls="ls -G -w -a"
 alias la="ls -a"
 alias lf="ls -F"
-alias ll="ls -al"
+alias ll="ls -alT"
 alias vi="vim"
 
 # rbenv
