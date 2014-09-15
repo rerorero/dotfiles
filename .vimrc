@@ -32,6 +32,8 @@ NeoBundle 'tomtom/tcomment_vim'
 NeoBundle "ctrlpvim/ctrlp.vim"
 NeoBundle 'gcmt/wildfire.vim'
 NeoBundle "Shougo/neocomplete.vim"
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'rhysd/clever-f.vim'
 NeoBundle 'surround.vim'
 NeoBundle 'PDV--phpDocumentor-for-Vim'
@@ -39,6 +41,9 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'kana/vim-submode' 
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'fatih/vim-go'
+NeoBundle 'scrooloose/syntastic'
 
 call neobundle#end()
 
@@ -317,3 +322,52 @@ set rtp+=${GOPATH}/src/github.com/nsf/gocode/vim
 "au BufWritePre *.go Fmt 
 au FileType go compiler go
 
+" tags bar 
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
+"syntasitci
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=2
+
+" neo snippets
+imap <C-p>     <Plug>(neosnippet_expand_or_jump)
+smap <C-p>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-p>     <Plug>(neosnippet_expand_target)
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
