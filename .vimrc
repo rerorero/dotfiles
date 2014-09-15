@@ -69,13 +69,14 @@ set smarttab
 set smartindent
 set autoindent
 set list
-set listchars=tab:»-,eol:↲,extends:»,precedes:«,nbsp:%
+set listchars=tab:»\ ,eol:↲,extends:»,precedes:«,nbsp:%
 set whichwrap=b,s,h,l,<,>,[,]
 set showmatch
 set noignorecase
 set smartcase
 set nowrapscan
 set grepprg=grep\ -nH
+
 
 
 " ctaagsでタグジャンプ時に新しいタブで開く
@@ -201,9 +202,9 @@ inoremap <expr><C-l>     neocomplete#complete_common_string()
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-  return neocomplete#close_popup() . "\<CR>"
+  ""return neocomplete#close_popup() . "\<CR>"
   " For no inserting <CR> key.
-  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -286,6 +287,8 @@ vnoremap ' "zdi'<C-R>z'<ESC>
 let g:indent_guides_auto_colors=0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#262626 ctermbg=16
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3c3c3c ctermbg=235
+autocmd VimEnter,Colorscheme * :hi SpecialKey term=underline ctermfg=darkgray guifg=darkgray
+highlight SpecialKey term=underline ctermfg=darkgray guifg=darkgray
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
@@ -303,4 +306,14 @@ noremap : ;
 " 隠しファイルをデフォルトで表示させる
 let NERDTreeShowHidden = 1
 nnoremap <C-f> :NERDTree<CR>
+
+" for Go lang
+" "let g:gofmt_command = 'goimports'
+" Go に付属の plugin と gocode を有効にする
+set rtp+=/usr/local/go/misc/vim
+set rtp+=${GOPATH}/src/github.com/nsf/gocode/vim
+" 保存時に :Fmt する
+""au FileType go setlocal sw=4 ts=4 sts=4 noet
+"au BufWritePre *.go Fmt 
+au FileType go compiler go
 
