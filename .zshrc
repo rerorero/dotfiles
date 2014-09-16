@@ -111,6 +111,10 @@ export PATH="$PATH:/Users/nato/tools/play/play-2.2.1:"
 export PATH="$PATH:/usr/local/mysql/bin:"
 export PATH="$PATH:/opt/local/bin:"
 export PATH="$PATH:/opt/local/sbin/:"
+export PATH="$PATH:/usr/local/go/bin:"
+
+# for GO
+export GOPATH=$HOME/go
 
 # vim用
 if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then

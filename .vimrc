@@ -32,6 +32,8 @@ NeoBundle 'tomtom/tcomment_vim'
 NeoBundle "ctrlpvim/ctrlp.vim"
 NeoBundle 'gcmt/wildfire.vim'
 NeoBundle "Shougo/neocomplete.vim"
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'rhysd/clever-f.vim'
 NeoBundle 'surround.vim'
 NeoBundle 'PDV--phpDocumentor-for-Vim'
@@ -39,6 +41,9 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'kana/vim-submode' 
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'fatih/vim-go'
+NeoBundle 'scrooloose/syntastic'
 
 call neobundle#end()
 
@@ -69,13 +74,14 @@ set smarttab
 set smartindent
 set autoindent
 set list
-set listchars=tab:»-,eol:↲,extends:»,precedes:«,nbsp:%
+set listchars=tab:»\ ,eol:↲,extends:»,precedes:«,nbsp:%
 set whichwrap=b,s,h,l,<,>,[,]
 set showmatch
 set noignorecase
 set smartcase
 set nowrapscan
 set grepprg=grep\ -nH
+
 
 
 " ctaagsでタグジャンプ時に新しいタブで開く
@@ -201,9 +207,9 @@ inoremap <expr><C-l>     neocomplete#complete_common_string()
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-  return neocomplete#close_popup() . "\<CR>"
+  ""return neocomplete#close_popup() . "\<CR>"
   " For no inserting <CR> key.
-  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -286,6 +292,8 @@ vnoremap ' "zdi'<C-R>z'<ESC>
 let g:indent_guides_auto_colors=0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#262626 ctermbg=16
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3c3c3c ctermbg=235
+autocmd VimEnter,Colorscheme * :hi SpecialKey term=underline ctermfg=darkgray guifg=darkgray
+highlight SpecialKey term=underline ctermfg=darkgray guifg=darkgray
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
@@ -304,3 +312,62 @@ noremap : ;
 let NERDTreeShowHidden = 1
 nnoremap <C-f> :NERDTree<CR>
 
+" for Go lang
+" "let g:gofmt_command = 'goimports'
+" Go に付属の plugin と gocode を有効にする
+set rtp+=/usr/local/go/misc/vim
+set rtp+=${GOPATH}/src/github.com/nsf/gocode/vim
+" 保存時に :Fmt する
+""au FileType go setlocal sw=4 ts=4 sts=4 noet
+"au BufWritePre *.go Fmt 
+au FileType go compiler go
+
+" tags bar 
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
+"syntasitci
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=2
+
+" neo snippets
+imap <C-p>     <Plug>(neosnippet_expand_or_jump)
+smap <C-p>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-p>     <Plug>(neosnippet_expand_target)
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
