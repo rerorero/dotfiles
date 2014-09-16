@@ -1,6 +1,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+fpath=(/usr/local/share/zsh-completions $fpath)
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -96,6 +98,10 @@ alias lf="ls -F"
 alias ll="ls -alT"
 alias vi="vim"
 
+#zsh-cmpletions
+autoload -Uz compinit
+compinit -u
+
 # rbenv
 eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
@@ -114,3 +120,4 @@ fi
 
 # ctags
 alias ctags='/Applications/MacVim.app/Contents/MacOS/ctags "$@"'
+
