@@ -97,6 +97,12 @@ alias la="ls -a"
 alias lf="ls -F"
 alias ll="ls -alT"
 alias vi="vim"
+alias g="git"
+
+# kick browser 
+alias firefox="open -a FireFox"
+alias safari="open -a Safari"
+alias chrome="open /Applications/Google\ Chrome.app"
 
 #zsh-cmpletions
 autoload -Uz compinit
@@ -124,4 +130,6 @@ fi
 
 # ctags
 alias ctags='/Applications/MacVim.app/Contents/MacOS/ctags "$@"'
+
+
 

@@ -1,0 +1,55 @@
+[user]
+	name = Ryo-Natori
+	email = ryo_natori@qteras.co.jp
+
+[diff]
+    tool = "twdiff"
+[difftool]
+    prompt = false
+[difftool "twdiff"]
+    cmd = /usr/local/bin/twdiff --wait --resume "$LOCAL" "$REMOTE"
+    
+[merge]
+    tool = "twdiff"
+[mergetool]
+    prompt = false
+[mergetool "twdiff"]
+    cmd = /usr/local/bin/twdiff --wait --resume "$LOCAL" "$REMOTE"
+
+[alias]
+    co = checkout
+    ci = commit
+    cia = commit -a
+    cm = commit --amend --no-edit
+    cam = commit -a --amend --no-edit
+    s = status
+    st = stash
+    stp = stash pop
+    a = add
+    un = reset HEAD
+    cb = checkout -b
+    d = diff
+    dc = diff --cached
+    ds = diff --staged
+    dt = difftool --staged
+    b = branch
+    ba = branch -a
+    lo = log
+    la = log --oneline
+    l = log -10 --oneline
+    f = fetch --prune
+    fup = fetch upstream 
+    mup = merge upstream/master
+    pl = !git pull origin `git rev-parse --abbrev-ref HEAD`
+    plo = pull origin
+    plom = pull origin master
+    ps = push
+    pso = push origin
+    psfo = push -f origin
+    psom = push origin master
+    r = rebase
+    ta = log --oneline --all --decorate --graph
+    t = log -10 --oneline --all --decorate --graph
+    p = !git push origin `git rev-parse --abbrev-ref HEAD`
+    delete-merged-branch = !git branch --merged | grep -v \\* | grep -v master | xargs -I % git branch -d %
+

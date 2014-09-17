@@ -83,6 +83,9 @@ set nowrapscan
 set grepprg=grep\ -nH
 
 
+" ヤンクの内容をぺーすとする
+nnoremap <silent> yp "0p
+nnoremap <silent> yP "0P
 
 " ctaagsでタグジャンプ時に新しいタブで開く
 nnoremap s] <C-w>g<C-]><C-w>T
@@ -371,3 +374,4 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
+
