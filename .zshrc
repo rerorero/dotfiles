@@ -53,7 +53,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/ryo_natori/.rbenv/bin:/Users/ryo_natori/.rbenv/shims:/usr/local/apache-maven-3.2.1/bin:/Library/PostgreSQL/9.3/bin:/Users/nato/tools/play/play-2.2.1:/usr/local/mysql/bin:/opt/local/bin:/opt/local/sbin/"
+#export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/ryo_natori/.rbenv/bin:/Users/ryo_natori/.rbenv/shims:/usr/local/apache-maven-3.2.1/bin:/Library/PostgreSQL/9.3/bin:/Users/nato/tools/play/play-2.2.1:/usr/local/mysql/bin:/opt/local/bin:/opt/local/sbin/"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -110,7 +110,7 @@ compinit -u
 
 # rbenv
 eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 export PATH="$PATH:/usr/local/apache-maven-3.2.1/bin:"
 export PATH="$PATH:/Library/PostgreSQL/9.3/bin:"
 export PATH="$PATH:/Users/nato/tools/play/play-2.2.1:"
