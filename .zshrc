@@ -104,6 +104,9 @@ alias firefox="open -a FireFox"
 alias safari="open -a Safari"
 alias chrome="open /Applications/Google\ Chrome.app"
 
+#vimrc
+alias vimrc="vim ~/.vimrc"
+
 #zsh-cmpletions
 autoload -Uz compinit
 compinit -u

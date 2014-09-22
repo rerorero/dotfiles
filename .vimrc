@@ -167,6 +167,15 @@ nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
 
+" Unite grep
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
+nnoremap <silent> ,g  :<C-u>Unite grep:. -buffer-name=search-buffer -no-quit<CR>
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
 
 """"""""""""""""""""""""""""""
 " newocomplete
@@ -283,12 +292,14 @@ inoremap [ []<LEFT>
 inoremap ( ()<LEFT>
 inoremap " ""<LEFT>
 inoremap ' ''<LEFT>
+inoremap {<Enter> {}<Left><CR><ESC><S-o>
+inoremap [<Enter> []<Left><CR><ESC><S-o>
+inoremap (<Enter> ()<Left><CR><ESC><S-o>
 vnoremap { "zdi{<C-R>z}<ESC>
 vnoremap [ "zdi[<C-R>z]<ESC>
 vnoremap ( "zdi(<C-R>z)<ESC>
 vnoremap " "zdi"<C-R>z"<ESC>
 vnoremap ' "zdi'<C-R>z'<ESC>
-
 """"""""""""""""""""""""""""""
 " vim intent guide
 """"""""""""""""""""""""""""""
@@ -314,6 +325,7 @@ noremap : ;
 " 隠しファイルをデフォルトで表示させる
 let NERDTreeShowHidden = 1
 nnoremap <C-f> :NERDTree<CR>
+nnoremap <silent> ,tt :TagbarToggle<CR>
 
 " for Go lang
 " "let g:gofmt_command = 'goimports'
@@ -353,6 +365,8 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
+let g:tagbar_ctags_bin="/usr/local/bin/ctags"
+nnoremap <C-f> :NERDTree<CR>
 
 "syntasitci
 let g:syntastic_enable_signs=1
@@ -374,4 +388,5 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
+
 
