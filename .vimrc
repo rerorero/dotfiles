@@ -324,7 +324,7 @@ noremap : ;
 
 " 隠しファイルをデフォルトで表示させる
 let NERDTreeShowHidden = 1
-nnoremap <C-f> :NERDTree<CR>
+nnoremap <silent> ,f :NERDTree<CR>>
 nnoremap <silent> ,tt :TagbarToggle<CR>
 
 " for Go lang
