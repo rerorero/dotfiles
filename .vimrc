@@ -44,6 +44,9 @@ NeoBundle 'kana/vim-submode'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'kshenoy/vim-signature'
+
+
 
 call neobundle#end()
 
@@ -324,7 +327,7 @@ noremap : ;
 
 " 隠しファイルをデフォルトで表示させる
 let NERDTreeShowHidden = 1
-nnoremap <silent> ,f :NERDTree<CR>>
+nnoremap <silent> ,f :NERDTreeToggle<CR>>
 nnoremap <silent> ,tt :TagbarToggle<CR>
 
 " for Go lang
@@ -366,7 +369,7 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
 \ }
 let g:tagbar_ctags_bin="/usr/local/bin/ctags"
-nnoremap <C-f> :NERDTree<CR>
+nnoremap <C-f> :NERDTreeToggle<CR>
 
 "syntasitci
 let g:syntastic_enable_signs=1
@@ -388,5 +391,7 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
+
+" vim-signature
 
 
