@@ -6,9 +6,7 @@ set clipboard=unnamed
 set number
 set hidden
 set incsearch
-set shiftwidth=4
 set tabstop=4
-set expandtab
 set smarttab
 set smartindent
 set autoindent
@@ -20,6 +18,11 @@ set noignorecase
 set smartcase
 set nowrapscan
 set grepprg=grep\ -nH
+
+" タブ幅
+set shiftwidth=2
+set expandtab
+au BufRead,BufNewFile *.php set tabstop=4 shiftwidth=4 filetype=php
 
 " ヤンクの内容をぺーすとする
 nnoremap <silent> yp "0p
