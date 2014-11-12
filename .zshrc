@@ -96,6 +96,7 @@ alias ls="ls -G -w -a"
 alias la="ls -a"
 alias lf="ls -F"
 alias ll="ls -alT"
+alias l="ls -alT"
 alias vi="vim"
 alias g="git"
 

@@ -281,4 +281,6 @@ endif
 
 " vim-signature
 
+" karoiyaでundoファイル使わない
+:set noundofile
 
