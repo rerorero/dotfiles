@@ -23,9 +23,13 @@
 'NERDTreeWinPos'	NERD_tree.txt	/*'NERDTreeWinPos'*
 'NERDTreeWinSize'	NERD_tree.txt	/*'NERDTreeWinSize'*
 'SignatureMapLeader'	signature.txt	/*'SignatureMapLeader'*
+<<<<<<< HEAD
 'b:syntastic_<checker>_exec'	syntastic.txt	/*'b:syntastic_<checker>_exec'*
 'b:syntastic_checkers'	syntastic.txt	/*'b:syntastic_checkers'*
 'b:syntastic_skip_checks'	syntastic.txt	/*'b:syntastic_skip_checks'*
+=======
+'b:syntastic_checkers'	syntastic.txt	/*'b:syntastic_checkers'*
+>>>>>>> 3a6e1a079400899aae713b474bf14dfc0621c456
 'ctrl-p'	ctrlp.txt	/*'ctrl-p'*
 'ctrlp'	ctrlp.txt	/*'ctrlp'*
 'ctrlp-<c-p>'	ctrlp.txt	/*'ctrlp-<c-p>'*
@@ -280,6 +284,10 @@
 :RefHistory	ref.txt	/*:RefHistory*
 :SubmodeRestoreOptions	submode.txt	/*:SubmodeRestoreOptions*
 :SyntasticCheck	syntastic.txt	/*:SyntasticCheck*
+<<<<<<< HEAD
+=======
+:SyntasticErrors	syntastic.txt	/*:SyntasticErrors*
+>>>>>>> 3a6e1a079400899aae713b474bf14dfc0621c456
 :SyntasticInfo	syntastic.txt	/*:SyntasticInfo*
 :SyntasticReset	syntastic.txt	/*:SyntasticReset*
 :SyntasticSetLoclist	syntastic.txt	/*:SyntasticSetLoclist*
@@ -557,7 +565,10 @@ g:neocomplete#enable_insert_char_pre	neocomplete.txt	/*g:neocomplete#enable_inse
 g:neocomplete#enable_prefetch	neocomplete.txt	/*g:neocomplete#enable_prefetch*
 g:neocomplete#enable_refresh_always	neocomplete.txt	/*g:neocomplete#enable_refresh_always*
 g:neocomplete#enable_smart_case	neocomplete.txt	/*g:neocomplete#enable_smart_case*
+<<<<<<< HEAD
 g:neocomplete#fallback_mappings	neocomplete.txt	/*g:neocomplete#fallback_mappings*
+=======
+>>>>>>> 3a6e1a079400899aae713b474bf14dfc0621c456
 g:neocomplete#force_omni_input_patterns	neocomplete.txt	/*g:neocomplete#force_omni_input_patterns*
 g:neocomplete#force_overwrite_completefunc	neocomplete.txt	/*g:neocomplete#force_overwrite_completefunc*
 g:neocomplete#ignore_composite_filetypes	neocomplete.txt	/*g:neocomplete#ignore_composite_filetypes*
