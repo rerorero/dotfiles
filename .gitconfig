@@ -51,3 +51,6 @@
     p = !git push origin `git rev-parse --abbrev-ref HEAD`
     delete-merged-branch = !git branch --merged | grep -v \\* | grep -v master | xargs -I % git branch -d %
 
+[user]
+	name = rerorero
+	email = nato9598@hotmail.co.jp
