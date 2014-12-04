@@ -51,6 +51,3 @@
     p = !git push origin `git rev-parse --abbrev-ref HEAD`
     delete-merged-branch = !git branch --merged | grep -v \\* | grep -v master | xargs -I % git branch -d %
 
-[user]
-	name = Ryo-Natori
-	email = ryo_natori@dwango.co.jp
