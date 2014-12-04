@@ -276,6 +276,7 @@
 :Ref	ref.txt	/*:Ref*
 :Ref-option	ref.txt	/*:Ref-option*
 :RefHistory	ref.txt	/*:RefHistory*
+:SortScalaImports	scala.txt	/*:SortScalaImports*
 :SubmodeRestoreOptions	submode.txt	/*:SubmodeRestoreOptions*
 :SyntasticCheck	syntastic.txt	/*:SyntasticCheck*
 :SyntasticErrors	syntastic.txt	/*:SyntasticErrors*
@@ -1146,6 +1147,9 @@ s_<Plug>(neosnippet_expand)	neosnippet.txt	/*s_<Plug>(neosnippet_expand)*
 s_<Plug>(neosnippet_expand_or_jump)	neosnippet.txt	/*s_<Plug>(neosnippet_expand_or_jump)*
 s_<Plug>(neosnippet_jump)	neosnippet.txt	/*s_<Plug>(neosnippet_jump)*
 s_<Plug>(neosnippet_jump_or_expand)	neosnippet.txt	/*s_<Plug>(neosnippet_jump_or_expand)*
+scala	scala.txt	/*scala*
+scala-commands	scala.txt	/*scala-commands*
+scala.txt	scala.txt	/*scala.txt*
 signature	signature.txt	/*signature*
 signature-commands	signature.txt	/*signature-commands*
 signature-contents	signature.txt	/*signature-contents*

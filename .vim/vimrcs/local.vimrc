@@ -36,17 +36,15 @@ NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'rhysd/clever-f.vim'
 NeoBundle 'surround.vim'
-NeoBundle 'PDV--phpDocumentor-for-Vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
-
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'kana/vim-submode' 
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'kshenoy/vim-signature'
-
-
+NeoBundle 'derekwyatt/vim-scala'
+NeoBundle 'tacroe/unite-mark'
 
 call neobundle#end()
 
@@ -281,4 +279,27 @@ endif
 
 " vim-signature
 
+" karoiyaでundoファイル使わない
+:set noundofile
+
+"mark 自動採番と一覧
+nnoremap ml :Unite mark<CR>
+nnoremap md :delmarks a-zA-Z<CR>
+if !exists('g:markrement_char')
+    let g:markrement_char = [
+    \     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+    \     'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+    \ ]
+endif
+let g:unite_source_mark_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+nnoremap <silent>mm :<C-u>call <SID>AutoMarkrement()<CR>
+function! s:AutoMarkrement()
+    if !exists('b:markrement_pos')
+        let b:markrement_pos = 0
+    else
+        let b:markrement_pos = (b:markrement_pos + 1) % len(g:markrement_char)
+    endif
+    execute 'mark' g:markrement_char[b:markrement_pos]
+    echo 'marked' g:markrement_char[b:markrement_pos]
+endfunction
 
