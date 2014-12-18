@@ -134,5 +134,8 @@ fi
 # ctags
 alias ctags='/Applications/MacVim.app/Contents/MacOS/ctags "$@"'
 
+# for nvm
+source ~/.nvm/nvm.sh
+
 
 

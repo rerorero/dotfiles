@@ -45,6 +45,7 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'kshenoy/vim-signature'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'tacroe/unite-mark'
+NeoBundle 'editorconfig/editorconfig-vim'
 
 call neobundle#end()
 
