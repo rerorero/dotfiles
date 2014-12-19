@@ -117,7 +117,6 @@ eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 export PATH="$PATH:/usr/local/apache-maven-3.2.1/bin:"
 export PATH="$PATH:/Library/PostgreSQL/9.3/bin:"
-export PATH="$PATH:/Users/nato/tools/play/play-2.2.1:"
 export PATH="$PATH:/usr/local/mysql/bin:"
 export PATH="$PATH:/opt/local/bin:"
 export PATH="$PATH:/opt/local/sbin/:"
@@ -134,6 +133,9 @@ fi
 
 # ctags
 alias ctags='/Applications/MacVim.app/Contents/MacOS/ctags "$@"'
+
+# for nvm
+source ~/.nvm/nvm.sh
 
 
 

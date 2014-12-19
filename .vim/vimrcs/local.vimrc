@@ -46,6 +46,7 @@ NeoBundle 'kshenoy/vim-signature'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'tacroe/unite-mark'
 NeoBundle 'PDV--phpDocumentor-for-Vim'
+NeoBundle 'editorconfig/editorconfig-vim'
 
 call neobundle#end()
 
