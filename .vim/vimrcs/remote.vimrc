@@ -115,4 +115,5 @@ set rtp+=${GOPATH}/src/github.com/nsf/gocode/vim
 "au BufWritePre *.go Fmt 
 au FileType go compiler go
 
-
+"xml format
+command! Xml :%s/></>\r</g | filetype indent on | setf xml | normal gg=G

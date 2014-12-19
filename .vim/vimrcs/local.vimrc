@@ -45,6 +45,7 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'kshenoy/vim-signature'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'tacroe/unite-mark'
+NeoBundle 'PDV--phpDocumentor-for-Vim'
 
 call neobundle#end()
 
@@ -60,8 +61,8 @@ NeoBundleCheck
 """"""""""""""""""""""""""""""
 " タブと分割
 """"""""""""""""""""""""""""""
-nnoremap sb :<C-u>Unite buffer_tab -buffer-name=file<CR>
-nnoremap sB :<C-u>Unite buffer -buffer-name=file<CR>
+nnoremap sB :<C-u>Unite buffer_tab -buffer-name=file<CR>
+nnoremap sb :<C-u>Unite buffer -buffer-name=file<CR>
 
 call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
 call submode#enter_with('bufmove', 'n', '', 's<', '<C-w><')
