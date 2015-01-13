@@ -13,7 +13,6 @@ set autoindent
 set list
 set listchars=tab:»\ ,eol:↲,extends:»,precedes:«,nbsp:%
 set whichwrap=b,s,h,l,<,>,[,]
-set showmatch
 set noignorecase
 set smartcase
 set nowrapscan
@@ -104,6 +103,24 @@ vnoremap ' "zdi'<C-R>z'<ESC>
 " US keyboard
 noremap ; :
 noremap : ;
+
+" remap Y
+nmap Y y$
+
+" 長い行を表示
+set display=lastline
+
+" ポップアップ高さ
+set pumheight=10
+
+" 対応括弧の表示と速度
+set showmatch
+set matchtime=1
+
+" インクリメント・デクリメント
+nnoremap + <C-a>
+nnoremap - <C-x>
+
 
 " for Go lang
 " "let g:gofmt_command = 'goimports'
