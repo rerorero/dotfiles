@@ -37,6 +37,10 @@ nnoremap sv :<C-u>vs<CR>
 nnoremap sq :<C-u>q<CR>
 nnoremap sQ :<C-u>bd<CR>
 
+" ヤンクの内容をぺーすとする
+nnoremap <silent> yp "0p
+nnoremap <silent> yP "0P
+
 " US keyboard
 noremap ; :
 noremap : ;
