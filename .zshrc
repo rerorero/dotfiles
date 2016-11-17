@@ -47,8 +47,8 @@ export M2_HOME=/usr/local/apache-maven-3.3.9
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home
 
 # rbenv
-eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+eval "$(rbenv init -)"
 export PATH="$PATH:/usr/local/apache-maven-3.3.9/bin:"
 export PATH="$PATH:/Library/PostgreSQL/9.3/bin:"
 export PATH="$PATH:/usr/local/mysql/bin:"
