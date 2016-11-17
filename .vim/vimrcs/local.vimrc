@@ -304,7 +304,6 @@ endfunction
 set clipboard=unnamed,autoselect
 
 " syntastic
-execute pathogen#infect()
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
