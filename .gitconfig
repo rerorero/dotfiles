@@ -52,3 +52,15 @@
     delete-merged-branch = !git branch --merged | grep -v \\* | grep -v master | xargs -I % git branch -d %
     export = archive --format=tar HEAD | tar -C -xf -
     zip = archive --formtat=zip HEAD > 
+    rerorero = !git config user.name "rerorero" && git config user.email "nato9598@hotmail.co.jp"
+    subpull = submodule foreach git pull origin master
+[user]
+	name = Ryo-Natori
+	email = ryo_natori@dwango.co.jp
+[filter "lfs"]
+	smudge = git-lfs smudge %f
+	required = true
+	clean = git-lfs clean %f
+
+[core]
+  editor = /Applications/MacVim.app/Contents/MacOS/Vim

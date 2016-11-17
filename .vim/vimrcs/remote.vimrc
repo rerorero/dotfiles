@@ -1,8 +1,14 @@
 syntax on
 
+set encoding=utf-8
+scriptencoding utf-8
+set fileencoding=utf-8
+set fileencodings=ucs-boms,utf-8,euc-jp,cp932
+set ambiwidth=double
+
 set directory=$HOME/vimtmp
 set backupdir=$HOME/vimbackup
-set clipboard=unnamed
+" set clipboard=unnamed
 set number
 set hidden
 set incsearch
@@ -15,6 +21,7 @@ set listchars=tab:»\ ,eol:↲,extends:»,precedes:«,nbsp:%
 set whichwrap=b,s,h,l,<,>,[,]
 set noignorecase
 set smartcase
+set hlsearch
 set nowrapscan
 set grepprg=grep\ -nH
 
@@ -101,8 +108,8 @@ vnoremap " "zdi"<C-R>z"<ESC>
 vnoremap ' "zdi'<C-R>z'<ESC>
 
 " US keyboard
-noremap ; :
-noremap : ;
+"noremap ; :
+"noremap : ;
 
 " remap Y
 nmap Y y$
@@ -134,3 +141,19 @@ au FileType go compiler go
 
 "xml format
 command! Xml :%s/></>\r</g | filetype indent on | setf xml | normal gg=G
+
+" コマンドの補完
+set wildmenu
+set history=1000
+
+" mouse
+if has('mouse')
+  set mouse=a
+  if has('mouse_sgr')
+    set ttymouse=sgr
+  elseif v:version > 703 || v:version is 703 && has('patch632')
+    set ttymouse=sgr
+  else
+    set ttymouse=xterm2
+  endif
+endif

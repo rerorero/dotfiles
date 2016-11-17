@@ -41,12 +41,12 @@ NeoBundle 'thinca/vim-ref'
 NeoBundle 'kana/vim-submode' 
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'fatih/vim-go'
-NeoBundle 'scrooloose/syntastic'
 NeoBundle 'kshenoy/vim-signature'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'tacroe/unite-mark'
 NeoBundle 'PDV--phpDocumentor-for-Vim'
 NeoBundle 'editorconfig/editorconfig-vim'
+NeoBundle 'chase/vim-ansible-yaml'
 
 call neobundle#end()
 
@@ -258,10 +258,6 @@ let g:tagbar_type_go = {
 let g:tagbar_ctags_bin="/usr/local/bin/ctags"
 nnoremap <C-f> :NERDTreeToggle<CR>
 
-"syntasitci
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=2
-
 " neo snippets
 imap <C-p>     <Plug>(neosnippet_expand_or_jump)
 smap <C-p>     <Plug>(neosnippet_expand_or_jump)
@@ -304,4 +300,23 @@ function! s:AutoMarkrement()
     execute 'mark' g:markrement_char[b:markrement_pos]
     echo 'marked' g:markrement_char[b:markrement_pos]
 endfunction
+
+set clipboard=unnamed,autoselect
+
+" syntastic
+execute pathogen#infect()
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+"syntasitci
+let g:syntastic_enable_signs=1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"let g:syntastic_yml_checkers = ['ansible_lint']
+"
+set conceallevel=0
+let g:vim_json_syntax_conceal = 0
 

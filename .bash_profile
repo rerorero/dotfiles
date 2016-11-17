@@ -18,15 +18,21 @@ alias lf="ls -F"
 alias ll="ls -alT"
 alias vi="vim"
 
+# mvn
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home
+export M2_HOME=/usr/local/apache-maven-3.3.9
+
 # rbenv
 eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
-export PATH="$PATH:/usr/local/apache-maven-3.2.1/bin:"
+export PATH="$PATH:/usr/local/apache-maven-3.3.9/bin:"
 export PATH="$PATH:/Library/PostgreSQL/9.3/bin:"
 export PATH="$PATH:/Users/nato/tools/play/play-2.2.1:"
 export PATH="$PATH:/usr/local/mysql/bin:"
 export PATH="$PATH:/opt/local/bin:"
 export PATH="$PATH:/opt/local/sbin/:"
+export PATH="$PATH:$M2_HOME/bin/:"
+
 
 # vim用
 if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then
@@ -36,3 +42,6 @@ fi
 
 # ctags
 alias ctags='/Applications/MacVim.app/Contents/MacOS/ctags "$@"'
+
+# added by Anaconda2 4.1.1 installer
+export PATH="/Users/ryo_natori/anaconda/bin:$PATH"
