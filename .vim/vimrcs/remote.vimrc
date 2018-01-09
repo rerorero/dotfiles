@@ -8,7 +8,7 @@ set ambiwidth=double
 
 set directory=$HOME/vimtmp
 set backupdir=$HOME/vimbackup
-" set clipboard=unnamed
+set clipboard+=unnamed
 set number
 set hidden
 set incsearch
@@ -132,12 +132,12 @@ nnoremap - <C-x>
 " for Go lang
 " "let g:gofmt_command = 'goimports'
 " Go に付属の plugin と gocode を有効にする
-set rtp+=/usr/local/go/misc/vim
-set rtp+=${GOPATH}/src/github.com/nsf/gocode/vim
+" set rtp+=/usr/local/go/misc/vim
+" set rtp+=${GOPATH}/src/github.com/nsf/gocode/vim
 " 保存時に :Fmt する
 ""au FileType go setlocal sw=4 ts=4 sts=4 noet
 "au BufWritePre *.go Fmt 
-au FileType go compiler go
+" au FileType go compiler go
 
 "xml format
 command! Xml :%s/></>\r</g | filetype indent on | setf xml | normal gg=G

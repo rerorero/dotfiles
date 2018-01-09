@@ -40,13 +40,14 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'kana/vim-submode' 
 NeoBundle 'majutsushi/tagbar'
-NeoBundle 'fatih/vim-go'
+" NeoBundle 'fatih/vim-go'
 NeoBundle 'kshenoy/vim-signature'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'tacroe/unite-mark'
 NeoBundle 'PDV--phpDocumentor-for-Vim'
 NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'chase/vim-ansible-yaml'
+NeoBundle 'scrooloose/syntastic.git'
 
 call neobundle#end()
 
@@ -228,33 +229,33 @@ nnoremap <silent> ,f :NERDTreeToggle<CR>>
 nnoremap <silent> ,tt :TagbarToggle<CR>
 
 " tags bar 
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
+" let g:tagbar_type_go = {
+"     \ 'ctagstype' : 'go',
+"     \ 'kinds'     : [
+"         \ 'p:package',
+"         \ 'i:imports:1',
+"         \ 'c:constants',
+"         \ 'v:variables',
+"         \ 't:types',
+"         \ 'n:interfaces',
+"         \ 'w:fields',
+"         \ 'e:embedded',
+"         \ 'm:methods',
+"         \ 'r:constructor',
+"         \ 'f:functions'
+"     \ ],
+"     \ 'sro' : '.',
+"     \ 'kind2scope' : {
+"         \ 't' : 'ctype',
+"         \ 'n' : 'ntype'
+"     \ },
+"     \ 'scope2kind' : {
+"         \ 'ctype' : 't',
+"         \ 'ntype' : 'n'
+"     \ },
+"     \ 'ctagsbin'  : 'gotags',
+"     \ 'ctagsargs' : '-sort -silent'
+" \ }
 let g:tagbar_ctags_bin="/usr/local/bin/ctags"
 nnoremap <C-f> :NERDTreeToggle<CR>
 
@@ -307,6 +308,7 @@ set clipboard=unnamed,autoselect
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+let g:syntastic_javascript_checkers=['eslint']
 
 "syntasitci
 let g:syntastic_enable_signs=1

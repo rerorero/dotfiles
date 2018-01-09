@@ -55,9 +55,9 @@ export PATH="$PATH:/usr/local/mysql/bin:"
 export PATH="$PATH:/opt/local/bin:"
 export PATH="$PATH:/opt/local/sbin/:"
 export PATH="$PATH:/usr/local/go/bin:"
-export PATH="$PATH:$HOME/packer:"
 export PATH="$PATH:$HOME/activator/activator-dist-1.3.5:"
 export PATH="$PATH:$M2_HOME/bin:"
+export PATH="$PATH:$HOME/.cargo/bin:"
 export RUST_SRC_PATH=~/rust/rust/src
 
 
@@ -79,4 +79,5 @@ source ~/.nvm/nvm.sh
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
+export PHANTOMJS_BIN=/Users/ryo_natori/.nvm/versions/v5.8.0/lib/node_modules/karma-phantomjs-launcher/node_modules/phantomjs-prebuilt/lib/phantom/bin/phantomjs
 
