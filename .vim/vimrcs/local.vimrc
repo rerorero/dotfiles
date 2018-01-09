@@ -40,11 +40,9 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'kana/vim-submode' 
 NeoBundle 'majutsushi/tagbar'
-" NeoBundle 'fatih/vim-go'
 NeoBundle 'kshenoy/vim-signature'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'tacroe/unite-mark'
-NeoBundle 'PDV--phpDocumentor-for-Vim'
 NeoBundle 'editorconfig/editorconfig-vim'
 NeoBundle 'chase/vim-ansible-yaml'
 NeoBundle 'scrooloose/syntastic.git'
@@ -321,3 +319,4 @@ let g:syntastic_check_on_wq = 0
 set conceallevel=0
 let g:vim_json_syntax_conceal = 0
 
+set backspace=indent,eol,start

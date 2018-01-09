@@ -44,7 +44,7 @@ compinit -u
 
 # mvn
 export M2_HOME=/usr/local/apache-maven-3.3.9
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
@@ -55,6 +55,7 @@ export PATH="$PATH:/usr/local/mysql/bin:"
 export PATH="$PATH:/opt/local/bin:"
 export PATH="$PATH:/opt/local/sbin/:"
 export PATH="$PATH:/usr/local/go/bin:"
+export PATH="$PATH:$HOME/packer:"
 export PATH="$PATH:$HOME/activator/activator-dist-1.3.5:"
 export PATH="$PATH:$M2_HOME/bin:"
 export PATH="$PATH:$HOME/.cargo/bin:"
@@ -69,9 +70,6 @@ if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then
   alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
   alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 fi
-
-# ctags
-alias ctags='/Applications/MacVim.app/Contents/MacOS/ctags "$@"'
 
 # for nvm
 source ~/.nvm/nvm.sh

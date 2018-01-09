@@ -63,4 +63,4 @@
 	clean = git-lfs clean %f
 
 [core]
-  editor = /Applications/MacVim.app/Contents/MacOS/Vim
+    editor = /Applications/MacVim.app/Contents/MacOS/Vim
