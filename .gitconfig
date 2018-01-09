@@ -55,8 +55,8 @@
     rerorero = !git config user.name "rerorero" && git config user.email "nato9598@hotmail.co.jp"
     subpull = submodule foreach git pull origin master
 [user]
-	name = Ryo-Natori
-	email = ryo_natori@dwango.co.jp
+	name = rerorero
+	email = nato9598@hotmail.co.jp
 [filter "lfs"]
 	smudge = git-lfs smudge %f
 	required = true
