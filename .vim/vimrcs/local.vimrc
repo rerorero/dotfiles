@@ -1,68 +1,232 @@
-""""""""""""""""""""""""""""""
-" プラグインのセットアップ
-""""""""""""""""""""""""""""""
-if has('vim_starting')
-  set nocompatible               " Be iMproved
-
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+if &compatible
+  set nocompatible
 endif
 
-" Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
+" Add the dein installation directory into runtimepath
+set runtimepath+=~/.vim/bundle/repos/github.com/Shougo/dein.vim
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+if dein#load_state('~/.vim/bundle')
+  call dein#begin('~/.vim/bundle')
+  call dein#add('~/.vim/bundle/repos/github.com/Shougo/dein.vim')
+  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('Shougo/denite.nvim')
+  call dein#add('ctrlpvim/ctrlp.vim')
+  call dein#add('fatih/vim-go')
+  call dein#add('autozimu/LanguageClient-neovim', { 'build': 'bash install.sh', 'rev': 'next' })
+  call dein#add('preservim/nerdtree')
+  call dein#add('kana/vim-submode')
+  call dein#add('buoto/gotests-vim')
+  call dein#add('Yggdroot/indentLine')
+  call dein#add('tomtom/tcomment_vim')
+  call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
 
-" ファイルオープンを便利に
-NeoBundle 'Shougo/unite.vim'
-" Unite.vimで最近使ったファイルを表示できるようにする
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/vimproc.vim', {
-      \ 'build' : {
-      \     'windows' : 'tools\\update-dll-mingw',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'tomtom/tcomment_vim'
-NeoBundle "ctrlpvim/ctrlp.vim"
-NeoBundle 'gcmt/wildfire.vim'
-NeoBundle "Shougo/neocomplete.vim"
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'rhysd/clever-f.vim'
-NeoBundle 'surround.vim'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'thinca/vim-ref'
-NeoBundle 'kana/vim-submode' 
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'kshenoy/vim-signature'
-NeoBundle 'derekwyatt/vim-scala'
-NeoBundle 'tacroe/unite-mark'
-NeoBundle 'editorconfig/editorconfig-vim'
-NeoBundle 'chase/vim-ansible-yaml'
-NeoBundle 'scrooloose/syntastic.git'
+  call dein#end()
+  call dein#save_state()
+endif
 
-call neobundle#end()
+""if dein#check_install()
+""  call dein#install()
+""endif
 
-" Required:
 filetype plugin indent on
+syntax enable
 
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
 """"""""""""""""""""""""""""""
+" Denite.nvim
+""""""""""""""""""""""""""""""
+nmap <silent> ,f :<C-u>Denite file/rec<CR>
+nmap <silent> ,b :<C-u>Denite buffer<CR>
+nmap <silent> ,l :<C-u>Denite line<CR>
 
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>
+  \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d
+  \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p
+  \ denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> q
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i
+  \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space>
+  \ denite#do_map('toggle_select').'j'
+endfunction
+
+autocmd FileType denite-filter call s:denite_filter_my_settings()
+function! s:denite_filter_my_settings() abort
+  " 一つ上のディレクトリを開き直す
+  inoremap <silent><buffer><expr> <BS> denite#do_map('move_up_path')
+  " imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
+  " Deniteを閉じる
+  inoremap <silent><buffer><expr> <C-c> denite#do_map('quit')
+  nnoremap <silent><buffer><expr> <C-c> denite#do_map('quit')
+endfunction
+
+" configure grep
+nnoremap [grep] <Nop>
+nmap ,g [grep]
+nmap <silent> [grep]g :<C-u>Denite grep -buffer-name=grep-default-buf<CR>
+nmap <silent> [grep]r :<C-u>Denite -resume -buffer-name=grep-default-buf<CR>
+nmap <silent> [grep]n :<C-u>Denite -resume -buffer-name=grep-default-buf -cursor-pos=+1 -immediately<CR>
+nmap <silent> [grep]m :<C-u>Denite -resume -buffer-name=grep-default-buf -cursor-pos=-1 -immediately<CR>
+let s:ignore_globs = ['.git', '.idea', 'node_modules']
+call denite#custom#var('grep', 'command', ['ag'])
+call denite#custom#var('grep', 'default_opts',['-i', '--vimgrep'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+call denite#custom#var('file_rec', 'command', [
+      \ 'ag',
+      \ '--follow',
+      \ ] + map(deepcopy(s:ignore_globs), { k, v -> '--ignore=' . v }) + [
+      \ '--nocolor',
+      \ '--nogroup',
+      \ '-g',
+      \ ''
+      \ ])
+" call denite#custom#source('file/rec', 'matchers', ['matcher/substring'])
+" call denite#custom#filter('matcher/ignore_globs', 'ignore_globs', s:ignore_globs)
+
+" Change default action.
+""call denite#custom#kind('file', 'default_action', 'split')
+
+""""""""""""""""""""""""""""""
+" deoplete.vim
+""""""""""""""""""""""""""""""
+let g:deoplete#enable_at_startup = 1
+set completeopt+=noinsert
+call deoplete#custom#option('auto_complete_delay', 200)
+
+""""""""""""""""""""""""""""""
+" golang
+""""""""""""""""""""""""""""""
+""letc g:go_debug = ['shell-commands']
+" 保存時に必要なimportを自動的に挿入
+let g:go_fmt_command = "goimports"
+let g:go_fmt_options = {
+\ 'goimports': '-local github.com/kouzoh',
+\ }
+" LSPに任せる機能をOFFにする
+let g:go_def_mapping_enabled = 0
+let g:go_doc_keywordprg_enabled = 0
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:go_rename_command = 'gopls'
+
+let g:go_list_type = "quickfix"
+
+" run / test
+autocmd FileType go nnoremap <buffer>gb :<C-u>GoBuild<CR>
+" autocmd FileType go nnoremap <buffer>gr :<C-u>GoReferrers<CR> replaced with coc
+autocmd FileType go nnoremap <buffer>gt :<C-u>GoTestFunc<CR>
+" autocmd FileType go nnoremap <buffer>gn :<C-u>GoRename<Space> replaced with coc
+""autocmd FileType go nnoremap <buffer>gi :<C-u>GoInfo<CR> " replaced with coc
+autocmd FileType go nnoremap <buffer>gf :<C-u>GoFillStruct<CR>
+autocmd FileType go nnoremap <buffer><C-a> :<C-u>GoAlternate<CR>
+""autocmd FileType go nnoremap <buffer>gd :<C-u>GoDef<CR> " replaced with coc
+
+let g:gotests_bin = '/Users/rerorero/go/bin/gotests'
+
+""""""""""""""""""""""""""""""
+" Language Server
+""""""""""""""""""""""""""""""
+set hidden
+let g:LanguageClient_serverCommands = {
+    \ 'go': ['gopls']
+    \ }
+let g:LanguageClient_loadSettings = 1
+"nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+
+""""""""""""""""""""""""""""""
+" coc.nvim
+""""""""""""""""""""""""""""""
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+" Give more space for displaying messages.
+set cmdheight=2
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion. TODO: map something else
+" inoremap <silent><expr> <c-space> coc#refresh()
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+" Symbol renaming.
+nmap <silent> gn <Plug>(coc-rename)
+" Mappings using CoCList:
+" Show all diagnostics.
+nnoremap <silent> <space>d  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>n  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>m  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent> <space>r  :<C-u>CocListResume<CR>
 
 """"""""""""""""""""""""""""""
 " タブと分割
 """"""""""""""""""""""""""""""
-nnoremap sB :<C-u>Unite buffer_tab -buffer-name=file<CR>
-nnoremap sb :<C-u>Unite buffer -buffer-name=file<CR>
+nnoremap sb :<C-u>Denite buffer -buffer-name=file<CR>
 
 call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
 call submode#enter_with('bufmove', 'n', '', 's<', '<C-w><')
@@ -73,250 +237,67 @@ call submode#map('bufmove', 'n', '', '<', '<C-w><')
 call submode#map('bufmove', 'n', '', '+', '<C-w>+')
 call submode#map('bufmove', 'n', '', '-', '<C-w>-')
 
+""""""""""""""""""""""""""""""
+" indent
+""""""""""""""""""""""""""""""
+let g:indentLine_color_term =239
+let g:indentLine_color_gui = '#708090'
+let g:indentLine_char = '¦'
 
 """"""""""""""""""""""""""""""
-" Unite
+" nerdtree
 """"""""""""""""""""""""""""""
-let g:unite_source_history_yank_enable =1
-let g:unite_source_file_mru_limit = 200
-nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
-nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
-nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
-nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
-
-" Unite grep
-let g:unite_enable_ignore_case = 1
-let g:unite_enable_smart_case = 1
-nnoremap <silent> ,g  :<C-u>Unite grep:. -buffer-name=search-buffer -no-quit<CR>
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-  let g:unite_source_grep_recursive_opt = ''
-endif
-
-""""""""""""""""""""""""""""""
-" newocomplete
-""""""""""""""""""""""""""""""
-"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'php' : $HOME.'/.vim/dict/php.dict',
-    \ 'java' : $HOME.'/.vim/dict/java.dict',
-    \ 'cpp' : $HOME.'/.vim/dict/cpp.dict',
-    \ 'c' : $HOME.'/.vim/dict/c.dict',
-    \ 'ruby' : $HOME.'/.vim/dict/ruby.dict',
-    \ 'javascript' : $HOME.'/.vim/dict/javascript.dict',
-    \ 'scala' : $HOME.'/.vim/dict/scala.dict',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  ""return neocomplete#close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
-" For cursor moving in insert mode(Not recommended)
-"inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-"inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-"inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-"inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-" Or set this.
-"let g:neocomplete#enable_cursor_hold_i = 1
-" Or set this.
-"let g:neocomplete#enable_insert_char_pre = 1
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
-
-""""""""""""""""""""""""""""""
-" phpDocumenter
-""""""""""""""""""""""""""""""
-inoremap <C-C> <ESC>:call PhpDocSingle()<CR>i
-nnoremap <C-C> :call PhpDocSingle()<CR>
-vnoremap <C-C> :call PhpDocRange()<CR
-
-""""""""""""""""""""""""""""""
-" clever-f
-""""""""""""""""""""""""""""""
-let g:clever_f_smart_case = 1
-
-""""""""""""""""""""""""""""""
-" vim intent guide
-""""""""""""""""""""""""""""""
-let g:indent_guides_auto_colors=0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#262626 ctermbg=16
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3c3c3c ctermbg=235
-autocmd VimEnter,Colorscheme * :hi SpecialKey term=underline ctermfg=darkgray guifg=darkgray
-highlight SpecialKey term=underline ctermfg=darkgray guifg=darkgray
-let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_start_level=2
-let g:indent_guides_guide_size=1
-let g:indent_guides_color_change_percent = 30
-
-""""""""""""""""""""""""""""""
-" vim-ref
-""""""""""""""""""""""""""""""
-let g:ref_cache_dir=$HOME.'/.vim/vim-ref/cache'
-let g:ref_phmanual_path=$HOME.'/.vim/vim-ref/php-chunked-xhtml'
-
+nnoremap <C-f> :NERDTreeToggle<CR>
 " 隠しファイルをデフォルトで表示させる
 let NERDTreeShowHidden = 1
-nnoremap <silent> ,f :NERDTreeToggle<CR>>
 nnoremap <silent> ,tt :TagbarToggle<CR>
 
-" tags bar 
-" let g:tagbar_type_go = {
-"     \ 'ctagstype' : 'go',
-"     \ 'kinds'     : [
-"         \ 'p:package',
-"         \ 'i:imports:1',
-"         \ 'c:constants',
-"         \ 'v:variables',
-"         \ 't:types',
-"         \ 'n:interfaces',
-"         \ 'w:fields',
-"         \ 'e:embedded',
-"         \ 'm:methods',
-"         \ 'r:constructor',
-"         \ 'f:functions'
-"     \ ],
-"     \ 'sro' : '.',
-"     \ 'kind2scope' : {
-"         \ 't' : 'ctype',
-"         \ 'n' : 'ntype'
-"     \ },
-"     \ 'scope2kind' : {
-"         \ 'ctype' : 't',
-"         \ 'ntype' : 'n'
-"     \ },
-"     \ 'ctagsbin'  : 'gotags',
-"     \ 'ctagsargs' : '-sort -silent'
-" \ }
-let g:tagbar_ctags_bin="/usr/local/bin/ctags"
-nnoremap <C-f> :NERDTreeToggle<CR>
+""""""""""""""""""""""""""""""
+" ctrlp
+""""""""""""""""""""""""""""""
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ }
 
-" neo snippets
-imap <C-p>     <Plug>(neosnippet_expand_or_jump)
-smap <C-p>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-p>     <Plug>(neosnippet_expand_target)
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
 
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
+""""""""""""""""""""""""""""""
+" json
+""""""""""""""""""""""""""""""
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
-" vim-signature
-
+""""""""""""""""""""""""""""""
+" etc
+""""""""""""""""""""""""""""""
 " karoiyaでundoファイル使わない
 :set noundofile
 
-"mark 自動採番と一覧
-nnoremap ml :Unite mark<CR>
-nnoremap md :delmarks a-zA-Z<CR>
-if !exists('g:markrement_char')
-    let g:markrement_char = [
-    \     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-    \     'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
-    \ ]
-endif
-let g:unite_source_mark_marks = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-nnoremap <silent>mm :<C-u>call <SID>AutoMarkrement()<CR>
-function! s:AutoMarkrement()
-    if !exists('b:markrement_pos')
-        let b:markrement_pos = 0
-    else
-        let b:markrement_pos = (b:markrement_pos + 1) % len(g:markrement_char)
-    endif
-    execute 'mark' g:markrement_char[b:markrement_pos]
-    echo 'marked' g:markrement_char[b:markrement_pos]
-endfunction
-
+" clipboard
 set clipboard=unnamed,autoselect
 
-" syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_javascript_checkers=['eslint']
-
-"syntasitci
-let g:syntastic_enable_signs=1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-"let g:syntastic_yml_checkers = ['ansible_lint']
-"
 set conceallevel=0
 let g:vim_json_syntax_conceal = 0
 
 set backspace=indent,eol,start
+
+"terraform
+let g:terraform_fmt_on_save = 1
+
+
+" quickfix
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+
+nnoremap <silent>,t :term<CR>
+
+" easy-motion <Leader>f{char} to move to {char}
+" map <silent> ,f <Plug>(easymotion-bd-f)
+" nmap <silent> ,f <Plug>(easymotion-overwin-f)
+
+" copy file path
+nmap ,cf :let @*=expand("%:p")<CR>

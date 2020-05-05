@@ -55,10 +55,14 @@
     rerorero = !git config --local user.name "rerorero" && git config --local user.email "nato9598@hotmail.co.jp"
     subpull = submodule foreach git pull origin master
 [user]
+	email = nato9598@hotmail.co.jp
+	name = rerorero
 [filter "lfs"]
 	smudge = git-lfs smudge %f
 	required = true
 	clean = git-lfs clean %f
 
 [core]
-    editor = /usr/local/Cellar/macvim/8.0-144_3/MacVim.app/Contents/MacOS/Vim
+    editor = /usr/local/bin/vim
+[ghq]
+	root = /Users/rerorero/go/src

@@ -42,8 +42,8 @@ nnoremap <silent> yp "0p
 nnoremap <silent> yP "0P
 
 " US keyboard
-noremap ; :
-noremap : ;
+" noremap ; :
+" noremap : ;
 
 " remap Y
 nmap Y y$
@@ -51,3 +51,5 @@ nmap Y y$
 " インクリメント・デクリメント
 nnoremap + <C-a>
 nnoremap - <C-x>
+
+set clipboard=unnamed

@@ -45,3 +45,13 @@ alias ctags='/Applications/MacVim.app/Contents/MacOS/ctags "$@"'
 
 # added by Anaconda2 4.1.1 installer
 export PATH="/Users/ryo_natori/anaconda/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export ANYENV_ROOT="/Users/rerorero/.anyenv"
+export PATH=$PATH:"/Users/rerorero/.anyenv/bin"
+eval "$(anyenv init -)"
+export PATH="$(brew --prefix php@7.1)/bin:$PATH"
+
+export PATH="$HOME/.cargo/bin:$PATH"

@@ -1,5 +1,4 @@
 syntax on
-
 set encoding=utf-8
 scriptencoding utf-8
 set fileencoding=utf-8
@@ -25,6 +24,11 @@ set hlsearch
 set nowrapscan
 set grepprg=grep\ -nH
 
+hi SpecialKey ctermfg=239
+hi NonText ctermfg=239
+hi Pmenu      ctermfg=7   ctermbg=238 
+hi PmenuSel   ctermfg=0     ctermbg=186  
+
 " タブ幅
 set shiftwidth=2
 set expandtab
@@ -33,10 +37,6 @@ au BufRead,BufNewFile *.php set tabstop=4 shiftwidth=4 filetype=php
 " ヤンクの内容をぺーすとする
 nnoremap <silent> yp "0p
 nnoremap <silent> yP "0P
-
-" ctaagsでタグジャンプ時に新しいタブで開く
-nnoremap s] <C-w>g<C-]><C-w>T
-nnoremap s} <C-w>]
 
 " mac用カーソル移動
 nnoremap <C-a> 0
@@ -84,7 +84,6 @@ nnoremap sO <C-w>=
 nnoremap sN :<C-u>bn<CR>
 nnoremap sP :<C-u>bp<CR>
 nnoremap st :<C-u>tabnew<CR>
-nnoremap sT :<C-u>Unite tab<CR>
 nnoremap ss :<C-u>sp<CR>
 nnoremap sv :<C-u>vs<CR>
 nnoremap sq :<C-u>q<CR>
@@ -157,3 +156,6 @@ if has('mouse')
     set ttymouse=xterm2
   endif
 endif
+
+set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
+
