@@ -64,5 +64,8 @@
 
 [core]
     editor = /usr/local/bin/vim
+    excludesfile = ~/.gitignore
 [ghq]
 	root = /Users/rerorero/go/src
+[pull]
+	rebase = false
