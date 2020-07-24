@@ -11,6 +11,11 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# PROMPT
+emojiset="😏😇😻😎🧐🤪😣😱😤😭🥶🙄🤮👻🤣㊗️"
+emoji="${emojiset:$(( RANDOM % ${#emojiset} )):1}"
+PROMPT="${emoji} %F{green}%1d%f ${emoji} "
+
 # Customize to your needs...
 
 ######################################################
@@ -33,8 +38,12 @@ alias vi="vim"
 alias g="git"
 alias ghl='cd $(ghq list -p | peco)'
 alias ghg='ghq get'
-alias gho='git-open'
+alias gho='/usr/local/bin/git-open'
 alias cio='open https://circleci.com/gh/$(git remote get-url --push origin | sed -e "s/github.com://")/tree/$(git rev-parse --abbrev-ref HEAD)'
+alias t="tig"
+alias ts="tig status"
+alias tr="tig refs"
+alias tg="tig grep"
 
 # kick browser 
 alias firefox="open -a FireFox"
@@ -57,14 +66,15 @@ alias vimrc="vim ~/.vimrc"
 # kubernetes
 alias k='kubectl'
 alias kns='export NS=`kubectl get ns | awk '"'"'{print $1}'"'"' | peco`'
-alias teledev='kns && AUTHORITY_SERVICE_ENDPOINT=authority-dev.authority.svc.cluster.local:5000 SERVICE_NAME=`basename ${PWD}` GOOGLE_APPLICATION_CREDENTIALS="${HOME}/keys/${NS}.json" telepresence --run-shell --namespace $NS'
-alias teleswap='kns && AUTHORITY_SERVICE_ENDPOINT=authority-dev.authority.svc.cluster.local:5000 SERVICE_NAME=`basename ${PWD}` GOOGLE_APPLICATION_CREDENTIALS="${HOME}/keys/${NS}.json" telepresence --run-shell --namespace $NS --swap-deployment `kubectl --namespace $NS get deployment -o jsonpath="{.items[0].metadata.name}"`'
+alias teledev='kns && SERVICE_NAME=`basename ${PWD}` GOOGLE_APPLICATION_CREDENTIALS="${HOME}/keys/${NS}.json" telepresence --run-shell --namespace $NS'
+alias teleswap='kns && SERVICE_NAME=`basename ${PWD}` GOOGLE_APPLICATION_CREDENTIALS="${HOME}/keys/${NS}.json" telepresence --namespace $NS --swap-deployment `kubectl --namespace $NS get deployment -o jsonpath="{.items[0].metadata.name}"`'
+alias telenew='kns && SERVICE_NAME=`basename ${PWD}` GOOGLE_APPLICATION_CREDENTIALS="${HOME}/keys/${NS}.json" telepresence --namespace $NS --new-deployment rerorero --expose '
 
 alias kn='kns && kubens $NS'
 alias furypanda-ssh-ms='gcloud compute --project "fury-panda" ssh --zone "asia-northeast1-a" "fury-panda-microservices-instance-001"'
 #zsh-cmpletions
-autoload -Uz compinit
-compinit -u
+# autoload -Uz compinit
+# compinit -u
 
 # mvn
 export M2_HOME=/usr/local/Cellar/maven/3.5.2
@@ -86,6 +96,12 @@ export PATH="$PATH:$HOME/go/bin:"
 export RUST_SRC_PATH=~/rust/rust/src
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export PATH="$PATH:$HOME/pear/bin/"
+export PATH="$HOME/.tfenv/bin:$PATH"
+export PATH="/usr/local/opt/php@7.3/bin:$PATH"
+export PATH="/usr/local/opt/php@7.3/sbin:$PATH"
+export PATH="$HOME/istio/bin:$PATH"
+export PATH="$HOME/nvim-osx64/bin:$PATH"
+
 
 
 
@@ -106,8 +122,7 @@ fi
 # source ~/.nvm/nvm.sh
 #
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-#
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi #
 # for nodeenv
 export PATH="$HOME/.nodenv/bin:$PATH"
 eval "$(nodenv init -)"
@@ -124,3 +139,18 @@ if [ -f '/Users/rerorero/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/rerore
 if [ -f '/Users/rerorero/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/rerorero/google-cloud-sdk/completion.zsh.inc'; fi
 
 alias anon='$HOME/anonhelper.sh "$@"'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# iterm tab
+if [ $ITERM_SESSION_ID ]; then
+  export PROMPT_COMMAND='echo -ne "\033];${PWD##*/}\007"; ':"$PROMPT_COMMAND";
+fi
+
+# display directory name on iterm2 tab
+function chpwd() { echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print $1}'| rev)\007"}
+
+# for profiling
+# if (which zprof > /dev/null 2>&1) ;then
+#   zprof
+# fi
