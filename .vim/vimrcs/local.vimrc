@@ -19,6 +19,11 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('Yggdroot/indentLine')
   call dein#add('tomtom/tcomment_vim')
   call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
+  call dein#add('junegunn/fzf', { 'do': './install --all', 'merged': 0 })
+  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+  call dein#add('hashivim/vim-terraform')
+  call dein#add('prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] })
+  call dein#add('kassio/neoterm')
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')
@@ -70,7 +75,7 @@ endfunction
 
 " configure grep
 nnoremap [grep] <Nop>
-nmap ,g [grep]
+nmap ,G [grep]
 nmap <silent> [grep]g :<C-u>Denite grep -buffer-name=grep-default-buf<CR>
 nmap <silent> [grep]r :<C-u>Denite -resume -buffer-name=grep-default-buf<CR>
 nmap <silent> [grep]n :<C-u>Denite -resume -buffer-name=grep-default-buf -cursor-pos=+1 -immediately<CR>
@@ -100,9 +105,9 @@ call denite#custom#var('file_rec', 'command', [
 """"""""""""""""""""""""""""""
 " deoplete.vim
 """"""""""""""""""""""""""""""
-let g:deoplete#enable_at_startup = 1
-set completeopt+=noinsert
-call deoplete#custom#option('auto_complete_delay', 200)
+" let g:deoplete#enable_at_startup = 0
+" set completeopt+=noinsert
+" call deoplete#custom#option('auto_complete_delay', 200)
 
 """"""""""""""""""""""""""""""
 " golang
@@ -111,15 +116,14 @@ call deoplete#custom#option('auto_complete_delay', 200)
 " 保存時に必要なimportを自動的に挿入
 let g:go_fmt_command = "goimports"
 let g:go_fmt_options = {
-\ 'goimports': '-local github.com/kouzoh',
-\ }
+  \ 'goimports': '-local github.com/kouzoh',
+  \ }
 " LSPに任せる機能をOFFにする
 let g:go_def_mapping_enabled = 0
 let g:go_doc_keywordprg_enabled = 0
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_rename_command = 'gopls'
-
 let g:go_list_type = "quickfix"
 
 " run / test
@@ -127,7 +131,7 @@ autocmd FileType go nnoremap <buffer>gb :<C-u>GoBuild<CR>
 " autocmd FileType go nnoremap <buffer>gr :<C-u>GoReferrers<CR> replaced with coc
 autocmd FileType go nnoremap <buffer>gt :<C-u>GoTestFunc<CR>
 " autocmd FileType go nnoremap <buffer>gn :<C-u>GoRename<Space> replaced with coc
-""autocmd FileType go nnoremap <buffer>gi :<C-u>GoInfo<CR> " replaced with coc
+autocmd FileType go nnoremap <buffer>gi :<C-u>GoInfo<CR>
 autocmd FileType go nnoremap <buffer>gf :<C-u>GoFillStruct<CR>
 autocmd FileType go nnoremap <buffer><C-a> :<C-u>GoAlternate<CR>
 ""autocmd FileType go nnoremap <buffer>gd :<C-u>GoDef<CR> " replaced with coc
@@ -176,7 +180,7 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion. TODO: map something else
-" inoremap <silent><expr> <c-space> coc#refresh()
+" inoremap <silent><expr> <space><space> coc#refresh()
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
 " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
@@ -192,18 +196,24 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+" it has bug
+" autocmd FileType go nmap <C-a> :CocCommand go.test.toggle<cr>
+
+" autocmd FileType go nnoremap <buffer><C-a> :<C-u>GoAlternate<CR>
+
+" disable due to suddnely shutdown
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
+" function! s:show_documentation()
+"   if (index(['vim','help'], &filetype) >= 0)
+"     execute 'h '.expand('<cword>')
+"   else
+"     call CocAction('doHover')
+"   endif
+" endfunction
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -272,6 +282,172 @@ let g:ctrlp_custom_ignore = {
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
 """"""""""""""""""""""""""""""
+" FZF
+""""""""""""""""""""""""""""""
+nnoremap ,g :Rg<Space>
+let g:fzf_action = {
+\ 'ctrl-o': 'tab split'
+\ }
+command! -bang -nargs=* Rg
+\ call fzf#vim#grep(
+\ 'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
+\ <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+\ : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+\ <bang>0)
+
+""""""""""""""""""""""""""""""
+" terraform
+""""""""""""""""""""""""""""""
+let g:terraform_fmt_on_save=1
+
+""""""""""""""""""""""""""""""
+" load local config
+""""""""""""""""""""""""""""""
+augroup vimrc-local
+  autocmd!
+  autocmd BufNewFile,BufReadPost * call s:vimrc_local(expand('<afile>:p:h'))
+augroup END
+
+function! s:vimrc_local(loc)
+  let files = findfile('.vimrc.local', escape(a:loc, ' ') . ';', -1)
+  for i in reverse(filter(files, 'filereadable(v:val)'))
+    source `=i`
+  endfor
+endfunction
+
+""""""""""""""""""""""""""""""
+" misspell
+""""""""""""""""""""""""""""""
+augroup markdownSpell
+    autocmd!
+    autocmd FileType markdown setlocal spell
+    autocmd BufRead,BufNewFile *.md setlocal spell
+augroup END
+
+""""""""""""""""""""""""""""""
+" prettier
+""""""""""""""""""""""""""""""
+  " @formatアノテーションを持ったファイルの自動フォーマットを無効にする
+let g:prettier#autoformat = 0
+" Prettierのパースエラーをquickfixに表示しない
+let g:prettier#quickfix_enabled = 0
+autocmd BufWritePre *.js,*.ts,*.vue,*.css,*.scss,*.json,*.md PrettierAsync
+
+""""""""""""""""""""""""""""""
+" terminal / neoterm
+""""""""""""""""""""""""""""""
+let g:neoterm_default_mod='tab'
+let g:neoterm_autoscroll=1
+let g:neoterm_autoinsert=1
+nnoremap <c-t><c-g> :1Ttoggle<CR>
+nnoremap <c-t><c-r> :2Ttoggle<CR>
+nnoremap <c-t><c-d> :3Ttoggle<CR>
+nnoremap <c-t><c-t> :Ttoggle<CR>
+tnoremap <c-t><c-t> <C-w>:Ttoggle<CR>
+
+""""""""""""""""""""""""""""""
+" go test/debug
+""""""""""""""""""""""""""""""
+" breakpoint
+sign define delvbreakpoint text=B>
+command BP call s:go_delv_mark_breakpoint()
+command BD call s:go_delv_delete_breakpoint()
+command BS call s:go_delv_show_breakpoints()
+
+function! s:go_delv_mark_breakpoint() abort
+  let l:filename = fnamemodify(expand('%'), ':p:gs!\\!/!')
+  let l:linenr = line('.')
+  exe 'sign place 9900 name=delvbreakpoint group=go-delv-debug line=' . l:linenr . ' file=' . l:filename
+endfunction
+
+function! s:go_delv_delete_breakpoint() abort
+  exe 'sign unplace * group=go-delv-debug'
+endfunction
+
+function! s:go_delv_get_breakpoints() abort
+  " get all signs
+  let l:bufinfo = getbufinfo()
+  let l:listed = []
+  for l:info in l:bufinfo
+    if l:info.listed
+      let l:listed = add(l:listed, l:info)
+    endif
+  endfor
+  let l:signs = []
+  for l:buf in l:listed
+    let l:signs = add(l:signs, sign_getplaced(l:buf.bufnr, {'group': 'go-delv-debug', 'name': 'delvbreakpoint'})[0])
+  endfor
+
+  " breakpoints
+  let l:breakpoints = []
+  for l:item in l:signs
+    let l:filepath = fnamemodify(bufname(l:item.bufnr), ':p')
+    for l:sign in l:item.signs
+      call add(l:breakpoints, {
+            \ 'file': l:filepath,
+            \ 'line': l:sign.lnum,
+      \ })
+    endfor
+  endfor
+  return l:breakpoints
+endfunction
+
+function! s:go_delv_show_breakpoints() abort
+  let l:breakpoints = s:go_delv_get_breakpoints()
+  :echo 'Delv BreakPoints ---'
+  for l:bp in l:breakpoints
+    :echo l:bp.file ':' l:bp.line
+  endfor
+  return l:breakpoints
+endfunction
+
+" debug
+command GoDelvTest call s:go_delv_test()
+function! s:go_delv_test() abort
+  let l:test = search('func \(Test\|Example\)', "bcnW")
+  if l:test == 0
+    echo "vim-go: [debug] no test found immediate to cursor"
+    return
+  end
+
+  " create init file
+  let l:breakpoints = s:go_delv_get_breakpoints()
+  let l:contents = []
+  for l:bp in l:breakpoints
+    let l:bpcmd = 'break ' . l:bp.file . ':' . l:bp.line
+    call add(l:contents, l:bpcmd)
+  endfor
+  let l:initfile = fnameescape(tempname())
+  call writefile(l:contents, l:initfile)
+
+  " run via termnial
+  let l:line = getline(l:test)
+  let l:name = split(split(l:line, " ")[1], "(")[0]
+  let l:filepath = expand('%:p:h')
+  let l:cmd = ':T dlv test --init ' . l:initfile . ' --build-flags=$(go list ' . l:filepath . ') -- -test.run ' . l:name . '$'
+  exe l:cmd
+endfunction
+
+" test
+command GoUnitTest call s:go_unit_test()
+autocmd FileType go nnoremap <buffer>gT :<C-u>GoUnitTest<CR>
+function! s:go_unit_test() abort
+  let l:test = search('func \(Test\|Example\)', "bcnW")
+  if l:test == 0
+    echo "vim-go: [debug] no test found immediate to cursor"
+    return
+  end
+
+  " run via termnial
+  let l:line = getline(l:test)
+  let l:name = split(split(l:line, " ")[1], "(")[0]
+  let l:filepath = expand('%:p:h')
+  let l:cmd = ':T go test -run ' . l:name . '$ ' . l:filepath . ' -v -count 1'
+  exe l:cmd
+  exe ':Ttoggle'
+endfunction
+
+""""""""""""""""""""""""""""""
 " etc
 """"""""""""""""""""""""""""""
 " karoiyaでundoファイル使わない
@@ -301,3 +477,4 @@ nnoremap <silent>,t :term<CR>
 
 " copy file path
 nmap ,cf :let @*=expand("%:p")<CR>
+

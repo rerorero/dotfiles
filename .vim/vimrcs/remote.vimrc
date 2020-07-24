@@ -34,6 +34,18 @@ set shiftwidth=2
 set expandtab
 au BufRead,BufNewFile *.php set tabstop=4 shiftwidth=4 filetype=php
 
+" tabpage
+nnoremap <silent> tf :<c-u>tabfirst<cr>
+nnoremap <silent> tl :<c-u>tablast<cr>
+nnoremap <silent> tn :<c-u>tabnext<cr>
+nnoremap <silent> tN :<c-u>tabNext<cr>
+nnoremap <silent> tp :<c-u>tabprevious<cr>
+nnoremap <silent> te :<c-u>tabedit<cr>
+nnoremap <silent> tv :<c-u>tabedit<cr>
+nnoremap <silent> tc :<c-u>tabclose<cr>
+" nnoremap <silent> <leader>to :<c-u>tabonly<cr>
+nnoremap <silent> <leader>ts :<c-u>tabs<cr>
+
 " ヤンクの内容をぺーすとする
 nnoremap <silent> yp "0p
 nnoremap <silent> yP "0P
@@ -92,19 +104,19 @@ nnoremap sQ :<C-u>bd<CR>
 """"""""""""""""""""""""""""""
 " auto closing brackets
 """"""""""""""""""""""""""""""
-inoremap { {}<LEFT>
-inoremap [ []<LEFT>
-inoremap ( ()<LEFT>
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
-inoremap {<Enter> {}<Left><CR><ESC><S-o>
-inoremap [<Enter> []<Left><CR><ESC><S-o>
-inoremap (<Enter> ()<Left><CR><ESC><S-o>
-vnoremap { "zdi{<C-R>z}<ESC>
-vnoremap [ "zdi[<C-R>z]<ESC>
-vnoremap ( "zdi(<C-R>z)<ESC>
-vnoremap " "zdi"<C-R>z"<ESC>
-vnoremap ' "zdi'<C-R>z'<ESC>
+" inoremap { {}<LEFT>
+" inoremap [ []<LEFT>
+" inoremap ( ()<LEFT>
+" inoremap " ""<LEFT>
+" inoremap ' ''<LEFT>
+" inoremap {<Enter> {}<Left><CR><ESC><S-o>
+" inoremap [<Enter> []<Left><CR><ESC><S-o>
+" inoremap (<Enter> ()<Left><CR><ESC><S-o>
+" vnoremap { "zdi{<C-R>z}<ESC>
+" vnoremap [ "zdi[<C-R>z]<ESC>
+" vnoremap ( "zdi(<C-R>z)<ESC>
+" vnoremap " "zdi"<C-R>z"<ESC>
+" vnoremap ' "zdi'<C-R>z'<ESC>
 
 " US keyboard
 "noremap ; :
@@ -146,7 +158,7 @@ set wildmenu
 set history=1000
 
 " mouse
-if has('mouse')
+if !has('nvim') && has('mouse')
   set mouse=a
   if has('mouse_sgr')
     set ttymouse=sgr

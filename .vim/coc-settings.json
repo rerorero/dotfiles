@@ -1,12 +1,25 @@
 {
-  "suggest.noselect":false,
-  "suggest.preferCompleteThanJumpPlaceholder":true,
+  "diagnostic.checkCurrentLine": true,
+  "coc.preferences.hoverTarget": "float",
+  "suggest.enablePreview": true,
+  "suggest.noselect": false,
+  "suggest.preferCompleteThanJumpPlaceholder": true,
+  "go.goplsOptions": {
+    "usePlaceholders": true,
+    "completeUnimported": true,
+    "local": "github.com/kouzoh"
+  },
   "languageserver": {
-   "golang": {
+    "golang": {
       "command": "gopls",
-      "rootPatterns": ["go.mod"],
+      "rootPatterns": ["go.mod", ".vim/", ".git/"],
       "disableWorkspaceFolders": true,
       "filetypes": ["go"]
+    },
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {}
     }
   }
 }
