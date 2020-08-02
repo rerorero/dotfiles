@@ -24,6 +24,7 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('hashivim/vim-terraform')
   call dein#add('prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] })
   call dein#add('kassio/neoterm')
+  call dein#add('SirVer/ultisnips')
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')
@@ -129,7 +130,7 @@ let g:go_list_type = "quickfix"
 " run / test
 autocmd FileType go nnoremap <buffer>gb :<C-u>GoBuild<CR>
 " autocmd FileType go nnoremap <buffer>gr :<C-u>GoReferrers<CR> replaced with coc
-autocmd FileType go nnoremap <buffer>gt :<C-u>GoTestFunc<CR>
+autocmd FileType go nnoremap <buffer>gT :<C-u>GoTestFunc<CR>
 " autocmd FileType go nnoremap <buffer>gn :<C-u>GoRename<Space> replaced with coc
 autocmd FileType go nnoremap <buffer>gi :<C-u>GoInfo<CR>
 autocmd FileType go nnoremap <buffer>gf :<C-u>GoFillStruct<CR>
@@ -430,7 +431,7 @@ endfunction
 
 " test
 command GoUnitTest call s:go_unit_test()
-autocmd FileType go nnoremap <buffer>gT :<C-u>GoUnitTest<CR>
+autocmd FileType go nnoremap <buffer>gt :<C-u>GoUnitTest<CR>
 function! s:go_unit_test() abort
   let l:test = search('func \(Test\|Example\)', "bcnW")
   if l:test == 0
@@ -442,10 +443,31 @@ function! s:go_unit_test() abort
   let l:line = getline(l:test)
   let l:name = split(split(l:line, " ")[1], "(")[0]
   let l:filepath = expand('%:p:h')
-  let l:cmd = ':T go test -run ' . l:name . '$ ' . l:filepath . ' -v -count 1'
+  let l:cmd = ':T gotest -run ' . l:name . '$ ' . l:filepath . ' -v -count 1'
   exe l:cmd
   exe ':Ttoggle'
 endfunction
+
+""""""""""""""""""""""""""""""
+" snippet
+""""""""""""""""""""""""""""""
+" let g:UltiSnipsExpandTrigger="<c-s>"
+let g:UltiSnipsListSnippets="<c-s>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+command! -bang -nargs=+ -complete=dir SearchSnippets
+\ call fzf#vim#ag_raw(<q-args> . ' ~/.vim/bundle/.cache/.vimrc/.dein/gosnippets/UltiSnips',
+\ fzf#vim#with_preview(), <bang>0)
+:command SnipList SearchSnippets 'snippet ' <CR>
+:command SnipEdit UltiSnipsEdit
+
+""""""""""""""""""""""""""""""
+" NERDTree
+""""""""""""""""""""""""""""""
+:command NF NERDTreeFind
+
 
 """"""""""""""""""""""""""""""
 " etc
