@@ -1,1 +1,2 @@
-colors molokai
+set termguicolors
+" colors molokai

@@ -8,8 +8,8 @@ set runtimepath+=~/.vim/bundle/repos/github.com/Shougo/dein.vim
 if dein#load_state('~/.vim/bundle')
   call dein#begin('~/.vim/bundle')
   call dein#add('~/.vim/bundle/repos/github.com/Shougo/dein.vim')
+  call dein#add('morhetz/gruvbox')
   call dein#add('Shougo/deoplete.nvim')
-  call dein#add('Shougo/denite.nvim')
   call dein#add('ctrlpvim/ctrlp.vim')
   call dein#add('fatih/vim-go')
   call dein#add('autozimu/LanguageClient-neovim', { 'build': 'bash install.sh', 'rev': 'next' })
@@ -25,6 +25,11 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] })
   call dein#add('kassio/neoterm')
   call dein#add('SirVer/ultisnips')
+  call dein#add('easymotion/vim-easymotion')
+  call dein#add('110y/vim-go-expr-completion')
+  " call dein#add('scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'})
+  call dein#add('google/vim-jsonnet')
+  call dein#add('jjo/vim-cue')
   if !has('nvim')
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')
@@ -40,75 +45,6 @@ endif
 
 filetype plugin indent on
 syntax enable
-
-""""""""""""""""""""""""""""""
-" Denite.nvim
-""""""""""""""""""""""""""""""
-nmap <silent> ,f :<C-u>Denite file/rec<CR>
-nmap <silent> ,b :<C-u>Denite buffer<CR>
-nmap <silent> ,l :<C-u>Denite line<CR>
-
-autocmd FileType denite call s:denite_my_settings()
-function! s:denite_my_settings() abort
-  nnoremap <silent><buffer><expr> <CR>
-  \ denite#do_map('do_action')
-  nnoremap <silent><buffer><expr> d
-  \ denite#do_map('do_action', 'delete')
-  nnoremap <silent><buffer><expr> p
-  \ denite#do_map('do_action', 'preview')
-  nnoremap <silent><buffer><expr> q
-  \ denite#do_map('quit')
-  nnoremap <silent><buffer><expr> i
-  \ denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> <Space>
-  \ denite#do_map('toggle_select').'j'
-endfunction
-
-autocmd FileType denite-filter call s:denite_filter_my_settings()
-function! s:denite_filter_my_settings() abort
-  " 一つ上のディレクトリを開き直す
-  inoremap <silent><buffer><expr> <BS> denite#do_map('move_up_path')
-  " imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
-  " Deniteを閉じる
-  inoremap <silent><buffer><expr> <C-c> denite#do_map('quit')
-  nnoremap <silent><buffer><expr> <C-c> denite#do_map('quit')
-endfunction
-
-" configure grep
-nnoremap [grep] <Nop>
-nmap ,G [grep]
-nmap <silent> [grep]g :<C-u>Denite grep -buffer-name=grep-default-buf<CR>
-nmap <silent> [grep]r :<C-u>Denite -resume -buffer-name=grep-default-buf<CR>
-nmap <silent> [grep]n :<C-u>Denite -resume -buffer-name=grep-default-buf -cursor-pos=+1 -immediately<CR>
-nmap <silent> [grep]m :<C-u>Denite -resume -buffer-name=grep-default-buf -cursor-pos=-1 -immediately<CR>
-let s:ignore_globs = ['.git', '.idea', 'node_modules']
-call denite#custom#var('grep', 'command', ['ag'])
-call denite#custom#var('grep', 'default_opts',['-i', '--vimgrep'])
-call denite#custom#var('grep', 'recursive_opts', [])
-call denite#custom#var('grep', 'pattern_opt', [])
-call denite#custom#var('grep', 'separator', ['--'])
-call denite#custom#var('grep', 'final_opts', [])
-call denite#custom#var('file_rec', 'command', [
-      \ 'ag',
-      \ '--follow',
-      \ ] + map(deepcopy(s:ignore_globs), { k, v -> '--ignore=' . v }) + [
-      \ '--nocolor',
-      \ '--nogroup',
-      \ '-g',
-      \ ''
-      \ ])
-" call denite#custom#source('file/rec', 'matchers', ['matcher/substring'])
-" call denite#custom#filter('matcher/ignore_globs', 'ignore_globs', s:ignore_globs)
-
-" Change default action.
-""call denite#custom#kind('file', 'default_action', 'split')
-
-""""""""""""""""""""""""""""""
-" deoplete.vim
-""""""""""""""""""""""""""""""
-" let g:deoplete#enable_at_startup = 0
-" set completeopt+=noinsert
-" call deoplete#custom#option('auto_complete_delay', 200)
 
 """"""""""""""""""""""""""""""
 " golang
@@ -192,8 +128,8 @@ else
 endif
 
 " Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -272,10 +208,11 @@ let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|target)$',
   \ 'file': '\v\.(exe|so|dll)$',
   \ }
 
+nnoremap ,b :CtrlPBuffer<CR>
 
 """"""""""""""""""""""""""""""
 " json
@@ -286,15 +223,15 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 " FZF
 """"""""""""""""""""""""""""""
 nnoremap ,g :Rg<Space>
+nnoremap <space>g :Rg<Space>
 let g:fzf_action = {
 \ 'ctrl-o': 'tab split'
 \ }
+
 command! -bang -nargs=* Rg
-\ call fzf#vim#grep(
-\ 'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
-\ <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-\ : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
-\ <bang>0)
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
 
 """"""""""""""""""""""""""""""
 " terraform
@@ -332,7 +269,7 @@ augroup END
 let g:prettier#autoformat = 0
 " Prettierのパースエラーをquickfixに表示しない
 let g:prettier#quickfix_enabled = 0
-autocmd BufWritePre *.js,*.ts,*.vue,*.css,*.scss,*.json,*.md PrettierAsync
+" autocmd BufWritePre *.js,*.ts,*.vue,*.css,*.scss,*.json,*.md PrettierAsync
 
 """"""""""""""""""""""""""""""
 " terminal / neoterm
@@ -449,6 +386,11 @@ function! s:go_unit_test() abort
 endfunction
 
 """"""""""""""""""""""""""""""
+" go-expr-completion
+""""""""""""""""""""""""""""""
+autocmd FileType go nnoremap <silent> ge :<C-u>silent call go#expr#complete()<CR>
+
+""""""""""""""""""""""""""""""
 " snippet
 """"""""""""""""""""""""""""""
 " let g:UltiSnipsExpandTrigger="<c-s>"
@@ -468,6 +410,53 @@ command! -bang -nargs=+ -complete=dir SearchSnippets
 """"""""""""""""""""""""""""""
 :command NF NERDTreeFind
 
+""""""""""""""""""""""""""""""
+" easy motion
+""""""""""""""""""""""""""""""
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+nmap ,m <Plug>(easymotion-overwin-f)
+nmap <space><space> <Plug>(easymotion-overwin-f)
+" or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+" nmap ,m <Plug>(easymotion-overwin-f2)
+
+" Turn on case-insensitive feature
+let g:EasyMotion_smartcase = 1
+
+""""""""""""""""""""""""""""""
+" gruvbox
+""""""""""""""""""""""""""""""
+colorscheme gruvbox
+set background=dark
+" let g:lightline = {'clolrscheme': 'gruvbox'}
+hi! GruvboxBg2 ctermfg=239
+hi! NonText ctermfg=239
+
+""""""""""""""""""""""""""""""
+" Scala
+""""""""""""""""""""""""""""""
+" au BufRead,BufNewFile *.sbt,*.sc set filetype=scala
+" " Toggle panel with Tree Views
+" nnoremap <silent> <space>t :<C-u>CocCommand metals.tvp<CR>
+" " Toggle Tree View 'metalsPackages'
+" nnoremap <silent> <space>tp :<C-u>CocCommand metals.tvp metalsPackages<CR>
+" " Toggle Tree View 'metalsCompile'
+" nnoremap <silent> <space>tc :<C-u>CocCommand metals.tvp metalsCompile<CR>
+" " Toggle Tree View 'metalsBuild'
+" nnoremap <silent> <space>tb :<C-u>CocCommand metals.tvp metalsBuild<CR>
+" " Reveal current current class (trait or object) in Tree View 'metalsPackages'
+" nnoremap <silent> <space>tf :<C-u>CocCommand metals.revealInTreeView metalsPackages<CR>
+
+""""""""""""""""""""""""""""""
+" TComment
+""""""""""""""""""""""""""""""
+noremap <silent> <space>c  :<C-u>TComment<CR>
+"let g:tcomment_mapleader1="<c-0>"
+"let g:tcomment_mapleader2="<c-0>"
 
 """"""""""""""""""""""""""""""
 " etc

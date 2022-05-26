@@ -48,8 +48,16 @@ nnoremap <silent> yP "0P
 " remap Y
 nmap Y y$
 
-" インクリメント・デクリメント
-nnoremap + <C-a>
-nnoremap - <C-x>
+" easymotion
+set easymotion
+nmap <space><space> <Plug>(easymotion-s2)
+
+" Action
+nnoremap gb :action Compile<CR>
+nnoremap <C-o> :action Back<CR>
+nnoremap <C-i> :action Forward<CR>
+nnoremap <C-n> :action GotoNextError<CR>
+nnoremap <C-m> :action GotoPreviousError<CR>
+
 
 set clipboard=unnamed

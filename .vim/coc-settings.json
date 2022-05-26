@@ -1,9 +1,18 @@
 {
   "diagnostic.checkCurrentLine": true,
   "coc.preferences.hoverTarget": "float",
+  "coc.preferences.rootPatterns": [
+    "build.sbt",
+    "build.sc",
+    "pom.xml",
+    "build.gradle",
+    ".git"
+  ],
   "suggest.enablePreview": true,
   "suggest.noselect": false,
   "suggest.preferCompleteThanJumpPlaceholder": true,
+  "list.source.symbols.excludes": ["**/.git/**", "**/target/**"],
+  "metals.statusBarEnabled": true,
   "go.goplsOptions": {
     "usePlaceholders": true,
     "completeUnimported": true,
@@ -27,6 +36,13 @@
       "command": "terraform-lsp",
       "filetypes": ["terraform", "tf"],
       "initializationOptions": {}
+    },
+    "jedi": {
+      "enable": true,
+      "startupMessage": false,
+      "filetypes": ["py"],
+      "executable.command": "/Users/rerorero/.pyenv/shims/jedi-language-server"
     }
-  }
+  },
+  "coc.preferences.extensionUpdateCheck": "never"
 }

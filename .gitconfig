@@ -30,7 +30,7 @@
     dc = diff --cached
     ds = diff --staged
     dt = difftool --staged
-    b = branch
+    b = branch --sort=authordate
     ba = branch -a
     lo = log
     la = log --oneline
@@ -57,6 +57,7 @@
 [user]
 	email = nato9598@hotmail.co.jp
 	name = rerorero
+	signingkey = 2E43754C8C4F9BD6
 [filter "lfs"]
 	smudge = git-lfs smudge %f
 	required = true
@@ -69,3 +70,14 @@
 	root = /Users/rerorero/go/src
 [pull]
 	rebase = false
+
+[color "status"]
+    untracked = "#ff55ff"
+    changed = "#9955ff"
+
+[url "git@github.com:"]
+  insteadOf = https://github.com/
+[gpg]
+	program = gpg
+[commit]
+	gpgsign = true

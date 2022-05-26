@@ -22,6 +22,7 @@ PROMPT="${emoji} %F{green}%1d%f ${emoji} "
 ######################################################
 # エイリアスの設定
 alias cp='cp -iv'
+alias cpf='cp -rf'
 alias rm='rm -iv'
 alias mv='mv -iv'
 alias cl='clear'
@@ -41,9 +42,7 @@ alias ghg='ghq get'
 alias gho='/usr/local/bin/git-open'
 alias cio='open https://circleci.com/gh/$(git remote get-url --push origin | sed -e "s/github.com://")/tree/$(git rev-parse --abbrev-ref HEAD)'
 alias t="tig"
-alias ts="tig status"
-alias tr="tig refs"
-alias tg="tig grep"
+# export GIT_SSH_COMMAND="ssh -i $HOME/.ssh/id_ed25519_github -o IdentitiesOnly=yes"
 
 # kick browser 
 alias firefox="open -a FireFox"
@@ -65,6 +64,9 @@ alias vimrc="vim ~/.vimrc"
 
 # kubernetes
 alias k='kubectl'
+alias kd='kubectl describe'
+alias kg='kubectl get'
+alias kl='kubectl logs'
 alias kns='export NS=`kubectl get ns | awk '"'"'{print $1}'"'"' | peco`'
 alias teledev='kns && SERVICE_NAME=`basename ${PWD}` GOOGLE_APPLICATION_CREDENTIALS="${HOME}/keys/${NS}.json" telepresence --run-shell --namespace $NS'
 alias teleswap='kns && SERVICE_NAME=`basename ${PWD}` GOOGLE_APPLICATION_CREDENTIALS="${HOME}/keys/${NS}.json" telepresence --namespace $NS --swap-deployment `kubectl --namespace $NS get deployment -o jsonpath="{.items[0].metadata.name}"`'
@@ -78,7 +80,23 @@ alias furypanda-ssh-ms='gcloud compute --project "fury-panda" ssh --zone "asia-n
 
 # mvn
 export M2_HOME=/usr/local/Cellar/maven/3.5.2
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home
+# export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home
+
+# Flink
+export FLINK_HOME="/usr/local/Cellar/apache-flink/1.12.1/libexec"
+
+# kubernetes
+# export KUBECONFIG="$KUBECONFIG:`ls $HOME/.kube/config* | tr '\n' ':'`"
+
+source $HOME/.cargo/env
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/rerorero/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/rerorero/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/rerorero/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/rerorero/google-cloud-sdk/completion.zsh.inc'; fi
+
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
@@ -101,12 +119,16 @@ export PATH="/usr/local/opt/php@7.3/bin:$PATH"
 export PATH="/usr/local/opt/php@7.3/sbin:$PATH"
 export PATH="$HOME/istio/bin:$PATH"
 export PATH="$HOME/nvim-osx64/bin:$PATH"
-
-
-
+export PATH="/usr/local/Cellar/openssl@1.1/1.1.1g/bin:$PATH"
+export PATH="$FLINK_HOME/bin:$PATH"
+export PATH="$HOME/.poetry/bin:$PATH"
+export PATH="$HOME/.poetry/bin:$PATH"
+export PATH="$HOME/spark/bin:$PATH"
+export PATH="$HOME/ccloud-cli/bin:$PATH"
 
 # for GO
 export GOPATH=$HOME/go
+export GOPRIVATE=github.com/kouzoh
 
 # vim用
 if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then
@@ -121,22 +143,12 @@ fi
 # for nvm
 # source ~/.nvm/nvm.sh
 #
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+if which pyenv > /dev/null; then eval "$(pyenv init --path)"; fi
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi #
+
 # for nodeenv
 export PATH="$HOME/.nodenv/bin:$PATH"
 eval "$(nodenv init -)"
-
-# kubernetes
-# export KUBECONFIG="$KUBECONFIG:`ls $HOME/.kube/config* | tr '\n' ':'`"
-
-source $HOME/.cargo/env
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/rerorero/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/rerorero/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/rerorero/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/rerorero/google-cloud-sdk/completion.zsh.inc'; fi
 
 alias anon='$HOME/anonhelper.sh "$@"'
 
@@ -154,3 +166,16 @@ function chpwd() { echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print $1}'| rev)\0
 # if (which zprof > /dev/null 2>&1) ;then
 #   zprof
 # fi
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/rerorero/.sdkman"
+[[ -s "/Users/rerorero/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/rerorero/.sdkman/bin/sdkman-init.sh"
+
+# antlr
+export CLASSPATH=".:/usr/local/lib/antlr-4.9.2-complete.jar:$CLASSPATH"
+alias antlr4='java -jar /usr/local/lib/antlr-4.9.2-complete.jar'
+alias grun='java org.antlr.v4.gui.TestRig'
+
+ssh-add -K ~/.ssh/id_ed25519_github
+
+export PATH="$HOME/.poetry/bin:$PATH"

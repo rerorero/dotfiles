@@ -24,10 +24,11 @@ set hlsearch
 set nowrapscan
 set grepprg=grep\ -nH
 
-hi SpecialKey ctermfg=239
-hi NonText ctermfg=239
-hi Pmenu      ctermfg=7   ctermbg=238 
-hi PmenuSel   ctermfg=0     ctermbg=186  
+" use gruvbox
+" hi SpecialKey ctermfg=239
+" hi NonText ctermfg=239
+" hi Pmenu      ctermfg=7   ctermbg=238 
+" hi PmenuSel   ctermfg=0     ctermbg=186  
 
 " タブ幅
 set shiftwidth=2
@@ -72,7 +73,7 @@ endif
 set nocursorline
 " 挿入モードの時のみ、カーソル行をハイライトする
 autocmd InsertEnter,InsertLeave * set cursorline!
-highlight CursorLine cterm=NONE ctermfg=white ctermbg=gray
+" highlight CursorLine cterm=NONE ctermfg=white ctermbg=gray
 
 """"""""""""""""""""""""""""""
 " タブと分割
