@@ -135,16 +135,6 @@ export PATH="$HOME/ccloud-cli/bin:$PATH"
 export GOPATH=$HOME/go
 export GOPRIVATE=github.com/kouzoh
 
-# vim用
-if [ -f /Applications/MacVim.app/Contents/MacOS/Vim ]; then
-  alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-  alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-fi
-if [ -f /usr/local/Cellar/macvim/8.0-144_3/MacVim.app/Contents/MacOS/Vim ]; then
-  alias vi='env LANG=ja_JP.UTF-8 /usr/local/Cellar/macvim/8.0-144_3/MacVim.app/Contents/MacOS/Vim "$@"'
-  alias vim='env LANG=ja_JP.UTF-8 /usr/local/Cellar/macvim/8.0-144_3/MacVim.app/Contents/MacOS/Vim "$@"'
-fi
-
 # for nvm
 # source ~/.nvm/nvm.sh
 #
