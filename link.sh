@@ -15,4 +15,4 @@ ln -sf ~/dotfiles/.gitconfig ~/.gitconfig
 ln -s ~/go/src/github.com ~/github
 mkdir ~/vimtmp
 mkdir ~/vimbackup
-
+ln -sf ~/dotfiles/.config/nvim ~/.config/nvim

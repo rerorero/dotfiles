@@ -1,2 +1,3 @@
 .vim/bundle/*
 !neobundle.vim
+.config/nvim/plugin/packer_compiled.lua

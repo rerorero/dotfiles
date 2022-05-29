@@ -57,7 +57,9 @@
 [user]
 	email = nato9598@hotmail.co.jp
 	name = rerorero
-	signingkey = 2E43754C8C4F9BD6
+	signingkey = 8C9299A8B38DA38C
+  # signingkey = 2E43754C8C4F9BD6
+
 [filter "lfs"]
 	smudge = git-lfs smudge %f
 	required = true
@@ -67,7 +69,7 @@
     editor = /usr/local/bin/vim
     excludesfile = ~/.gitignore
 [ghq]
-	root = /Users/rerorero/go/src
+	root = ~/go/src
 [pull]
 	rebase = false
 

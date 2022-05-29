@@ -12,9 +12,14 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # PROMPT
-emojiset="😏😇😻😎🧐🤪😣😱😤😭🥶🙄🤮👻🤣㊗️"
-emoji="${emojiset:$(( RANDOM % ${#emojiset} )):1}"
-PROMPT="${emoji} %F{green}%1d%f ${emoji} "
+if [[ -z "${VIM}" ]]; then
+  emojiset="😏😇😻😎🧐🤪😣😱😤😭🥶🙄🤮👻🤣㊗️"
+  emoji="${emojiset:$(( RANDOM % ${#emojiset} )):1}"
+  PROMPT="${emoji} %F{green}%1d%f ${emoji} "
+else
+  # terminal in VIM
+  PROMPT="%F{green}%1d%f "
+fi
 
 # Customize to your needs...
 
@@ -35,7 +40,7 @@ alias la="ls -a"
 alias lf="ls -F"
 alias ll="ls -alT"
 alias l="ls -alT"
-alias vi="vim"
+alias vi="nvim"
 alias g="git"
 alias ghl='cd $(ghq list -p | peco)'
 alias ghg='ghq get'
