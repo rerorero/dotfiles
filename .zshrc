@@ -78,7 +78,6 @@ alias teleswap='kns && SERVICE_NAME=`basename ${PWD}` GOOGLE_APPLICATION_CREDENT
 alias telenew='kns && SERVICE_NAME=`basename ${PWD}` GOOGLE_APPLICATION_CREDENTIALS="${HOME}/keys/${NS}.json" telepresence --namespace $NS --new-deployment rerorero --expose '
 
 alias kn='kns && kubens $NS'
-alias furypanda-ssh-ms='gcloud compute --project "fury-panda" ssh --zone "asia-northeast1-a" "fury-panda-microservices-instance-001"'
 #zsh-cmpletions
 # autoload -Uz compinit
 # compinit -u
@@ -97,10 +96,10 @@ export FLINK_HOME="/usr/local/Cellar/apache-flink/1.12.1/libexec"
 source $HOME/.cargo/env
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/rerorero/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/rerorero/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '~/google-cloud-sdk/path.zsh.inc' ]; then . '~/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/rerorero/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/rerorero/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '~/google-cloud-sdk/completion.zsh.inc' ]; then . '~/google-cloud-sdk/completion.zsh.inc'; fi
 
 
 # rbenv
@@ -163,8 +162,8 @@ function chpwd() { echo -ne "\033]0;$(pwd | rev | awk -F \/ '{print $1}'| rev)\0
 # fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/rerorero/.sdkman"
-[[ -s "/Users/rerorero/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/rerorero/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="~/.sdkman"
+[[ -s "~/.sdkman/bin/sdkman-init.sh" ]] && source "~/.sdkman/bin/sdkman-init.sh"
 
 # antlr
 export CLASSPATH=".:/usr/local/lib/antlr-4.9.2-complete.jar:$CLASSPATH"
