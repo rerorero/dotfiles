@@ -49,10 +49,6 @@ opt('matchtime', 1)
 -- popup
 opt('pumheight', 10) -- popup height
 
--- status line
--- TODO: use lualine
-opt('statusline', [[%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P]])
-
 -- share clipboard
 opt('clipboard', 'unnamedplus')
 

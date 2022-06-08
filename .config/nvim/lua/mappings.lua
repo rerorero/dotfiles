@@ -4,10 +4,11 @@ local snr = {noremap = true, silent = true}
 
 map('n', '<C-a>', '0', snr) -- emulate mac shortcut: move to head
 map('n', '<C-e>', '$', snr) -- emulate mac shortcut: move to tail
-map('n', '<C-f>', ':NERDTreeToggle<CR>', snr) -- nerdtree: toggle
-map('',  '<C-n>', ':cnext<CR>', {}) -- quickfix: next
-map('',  '<C-m>', ':cprevious<CR>', {}) -- quickfix: prev
-map('n', '<C-s>', '<cmd>SymbolsOutline<CR>', snr) -- symbols outline
+-- map('n', '<C-f>', ':NERDTreeToggle<CR>', snr) -- nerdtree: toggle
+map('n', '<C-f>', ':NvimTreeToggle<CR>', snr) -- nvim-tree: toggle
+map('n', '<C-m>', '<cmd>lua vim.diagnostic.goto_prev()<CR>', snr)
+map('n', '<C-n>', '<cmd>lua vim.diagnostic.goto_next()<CR>', snr)
+map('n', '<C-s>', '<cmd>SymbolsOutline<CR>', snr) -- show symbols outline
 map('n', '<C-t><C-g>', ':1Ttoggle<CR>', snr) -- neoterm
 map('n', '<C-t><C-r>', ':2Ttoggle<CR>', snr) -- neoterm
 map('n', '<C-t><C-d>', ':3Ttoggle<CR>', snr) -- neoterm
@@ -45,11 +46,13 @@ map('n', 'yP', [["0P]], snr) -- paste yunk
 map('n', 'Y', 'y$', {}) -- yank a line
 
 map('n', '<space><space>', '<Plug>(easymotion-overwin-f)', {}) -- easymotion
-map('n', '<space>d', '<cmd>lua vim.diagnostic.setqflist()<CR>', snr) -- lsp: diagnostic
+map('n', '<space>d', '<cmd>TroubleToggle<CR>', snr) -- show/hide trables
+map('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', snr)
 
 map('n', ',g', ':Rg<Space>', { noremap = true }) -- grep
-map('n', ',d', '<cmd>Telescope diagnostics<CR>', snr) -- Telescope: diagnostic
 map('n', ',b', '<cmd>Telescope buffers<CR>', snr) -- Telescope: buffers
+map('n', ',f', '<cmd>Telescope find_files<CR>', snr) -- Telescope: buffers
+map('n', ',d', '<cmd>Telescope diagnostics<CR>', snr) -- Telescope: diagnostic
 map('n', ',s', '<cmd>Telescope lsp_document_symbols<CR>', snr) -- Telescope: symbols in a file
 map('n', ',S', ':Telescope lsp_workspace_symbols query=', { noremap = true }) -- Telescope: symbols in a project
 
