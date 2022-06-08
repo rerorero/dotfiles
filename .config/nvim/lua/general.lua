@@ -5,7 +5,6 @@ local cmd = vim.api.nvim_command
 opt('encoding', 'utf-8')
 opt('fileencodings', 'ucs-boms,utf-8,euc-jp,cp932')
 cmd('lang en_US.UTF-8')
-opt('ambiwidth', 'double') -- for Japanese
 
 -- search
 cmd('set incsearch') -- enable incremental search

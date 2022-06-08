@@ -40,6 +40,7 @@ return require('packer').startup(function(use)
       requires = {'kyazdani42/nvim-web-devicons'},
       tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
+  use 'machakann/vim-sandwich' -- surround
   -- lsp
   use 'williamboman/nvim-lsp-installer' -- LSP installer
   use 'neovim/nvim-lspconfig' -- Easy LSP configuration
