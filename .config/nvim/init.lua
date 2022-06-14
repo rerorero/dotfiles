@@ -5,7 +5,6 @@ require('lsp')
 require('mappings')
 
 require('plugin-cmp')
-require('plugin-ctrlp')
 require('plugin-easymotion')
 require('plugin-indentline')
 require('plugin-lualine')

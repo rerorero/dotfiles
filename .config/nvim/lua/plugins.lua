@@ -14,7 +14,6 @@ vim.cmd([[
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Packer can manage itself
   use { "ellisonleao/gruvbox.nvim" }
-  use 'ctrlpvim/ctrlp.vim' -- ctrl P
   use 'tomtom/tcomment_vim' -- comment multi lines (C--)
   use 'kana/vim-submode' -- modify split size
   use 'Yggdroot/indentLine' -- show vertical lines at each indentation level
