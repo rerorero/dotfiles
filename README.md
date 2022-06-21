@@ -38,7 +38,7 @@ and do `:PackerInstall`
 
 #### git
 
-- add gpg key to `~/.ssh/id_ed25519_github`
+- add ssh key to `~/.ssh/id_ed25519_github`
 - set `.ssh/config`
 
 ```
@@ -49,6 +49,8 @@ Host github
   UseKeychain yes
   AddKeysToAgent yes
 ```
+
+- add gpg key
 
 #### Go
 
