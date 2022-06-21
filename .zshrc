@@ -170,6 +170,6 @@ export CLASSPATH=".:/usr/local/lib/antlr-4.9.2-complete.jar:$CLASSPATH"
 alias antlr4='java -jar /usr/local/lib/antlr-4.9.2-complete.jar'
 alias grun='java org.antlr.v4.gui.TestRig'
 
-ssh-add -K ~/.ssh/id_ed25519_github
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519_github
 
 export PATH="$HOME/.poetry/bin:$PATH"
