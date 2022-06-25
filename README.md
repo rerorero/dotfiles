@@ -3,7 +3,7 @@
 ```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-brew install rbenv ruby-build nodenv python3 go golangci-lint gpg ghq peco
+brew install rbenv ruby-build nodenv python3 go golangci-lint gpg ghq peco wget ripgrep watchman
 
 ```
 
@@ -24,6 +24,8 @@ nodenv global 16.15.1
 
 ```
 brew install --HEAD neovim
+npm install neovim
+gem install neovim environment
 ```
 
 additionals
@@ -56,4 +58,18 @@ Host github
 
 ```
 go install golang.org/x/tools/gopls@latest
+```
+
+#### Ruby
+
+```
+rbenv install 2.7.6
+rbenv global 2.7.6
+```
+
+For sorbet project
+
+```
+bundler add sorbet
+bundle exec srb init
 ```

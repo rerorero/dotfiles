@@ -44,8 +44,8 @@ local servers = {
   terraformls = {},
 
   -- ruby
-  solargraph = {},
   sorbet = {},
+  solargraph = {},
 
   -- "tsserver",
   -- "rust_analyzer"
