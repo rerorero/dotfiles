@@ -1,1 +1,0 @@
-/Users/ryo_natori/dotfiles/.vim
