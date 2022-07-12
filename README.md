@@ -65,6 +65,7 @@ go install golang.org/x/tools/gopls@latest
 ```
 rbenv install 2.7.6
 rbenv global 2.7.6
+gem install rubocop rake
 ```
 
 For sorbet project
