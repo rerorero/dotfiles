@@ -14,6 +14,8 @@ map('n', '<C-t><C-r>', ':2Ttoggle<CR>', snr) -- neoterm
 map('n', '<C-t><C-d>', ':3Ttoggle<CR>', snr) -- neoterm
 map('n', '<C-t><C-t>', ':Ttoggle<CR>', snr) -- neoterm
 map('t', '<C-t><C-t>', [[<C-\><C-n>:Ttoggle<CR>]], snr) -- neoterm: toggle from terminal
+map('n', '<Up>', ':cp<CR>', snr) -- quickfix
+map('n', '<Down>', ':cn<CR>', snr) -- quickfix
 
 -- manage splits
 map('n', 's', '', snr)
@@ -55,6 +57,7 @@ map('n', ',f', '<cmd>Telescope find_files<CR>', snr) -- Telescope: buffers
 map('n', ',d', '<cmd>Telescope diagnostics<CR>', snr) -- Telescope: diagnostic
 map('n', ',s', '<cmd>Telescope lsp_document_symbols<CR>', snr) -- Telescope: symbols in a file
 map('n', ',S', ':Telescope lsp_workspace_symbols query=', { noremap = true }) -- Telescope: symbols in a project
+map('n', ',r', '<cmd>Telescope lsp_references<CR>', snr) -- Telescope: references
 
 local lsp_buf_mappings = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -65,7 +68,7 @@ local lsp_buf_mappings = function(client, bufnr)
   bmap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', snr)
   bmap(bufnr, 'n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', snr)
   bmap(bufnr, 'n', 'gn', '<cmd>lua vim.lsp.buf.rename()<CR>', snr)
-  bmap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', snr)
+  bmap(bufnr, 'n', 'gr', '<cmd>Telescope lsp_references<CR>', snr)
   bmap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', snr)
 end
 
