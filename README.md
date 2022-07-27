@@ -18,6 +18,7 @@ git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$H
 ```
 nodenv install 16.15.1
 nodenv global 16.15.1
+npm install typescript eslint
 ```
 
 #### nvim

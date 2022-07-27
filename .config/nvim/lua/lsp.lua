@@ -47,7 +47,10 @@ local servers = {
   sorbet = {},
   solargraph = {},
 
-  -- "tsserver",
+  -- typescript
+  tsserver = {},
+  eslint = {}
+
   -- "rust_analyzer"
 }
 

@@ -62,7 +62,7 @@ map('n', ',r', '<cmd>Telescope lsp_references<CR>', snr) -- Telescope: reference
 local lsp_buf_mappings = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   bmap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', snr)
-  bmap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', snr)
+  bmap(bufnr, 'n', 'gd', '<cmd>Telescope lsp_definitions<CR>', snr)
   bmap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', snr)
   bmap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', snr)
   bmap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', snr)
