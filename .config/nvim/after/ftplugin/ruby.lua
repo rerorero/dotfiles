@@ -4,7 +4,7 @@ local mappings = require('mappings')
 vim.bo.tabstop = 2
 vim.bo.softtabstop = 2
 vim.bo.shiftwidth = 2
-vim.bo.expandtab = false
+vim.bo.expandtab = true
 
 
 -- local snr = {noremap = true, silent = true}

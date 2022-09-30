@@ -44,7 +44,7 @@ alias vi="nvim"
 alias g="git"
 alias ghl='cd $(ghq list -p | peco)'
 alias ghg='ghq get'
-alias gho='/usr/local/bin/git-open'
+alias gho='git-open'
 alias cio='open https://circleci.com/gh/$(git remote get-url --push origin | sed -e "s/github.com://")/tree/$(git rev-parse --abbrev-ref HEAD)'
 alias t="tig"
 # export GIT_SSH_COMMAND="ssh -i $HOME/.ssh/id_ed25519_github -o IdentitiesOnly=yes"
@@ -82,10 +82,12 @@ alias kn='kns && kubens $NS'
 # autoload -Uz compinit
 # compinit -u
 
+# brew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # mvn
 export M2_HOME=/usr/local/Cellar/maven/3.5.2
-# export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home
+export JAVA_HOME="/opt/homebrew/opt/openjdk@11/"
 
 # Flink
 export FLINK_HOME="/usr/local/Cellar/apache-flink/1.12.1/libexec"
@@ -129,6 +131,7 @@ export PATH="$HOME/.poetry/bin:$PATH"
 export PATH="$HOME/.poetry/bin:$PATH"
 export PATH="$HOME/spark/bin:$PATH"
 export PATH="$HOME/ccloud-cli/bin:$PATH"
+export PATH="$HOME/.poetry/bin:$PATH"
 
 # for GO
 export GOPATH=$HOME/go
@@ -141,7 +144,7 @@ if which pyenv > /dev/null; then eval "$(pyenv init --path)"; fi
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi #
 
 # for nodeenv
-export PATH="$HOME/.nodenv/bin:$PATH"
+export PATH="$HOME/.nodenv/bin:$HOME/.nodenv/shims:$PATH"
 eval "$(nodenv init -)"
 
 alias anon='$HOME/anonhelper.sh "$@"'
@@ -173,4 +176,6 @@ alias grun='java org.antlr.v4.gui.TestRig'
 ssh-add --apple-use-keychain ~/.ssh/id_ed25519_github
 export GPG_TTY=$TTY
 
-export PATH="$HOME/.poetry/bin:$PATH"
+# Android
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"

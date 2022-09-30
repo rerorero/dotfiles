@@ -1,4 +1,4 @@
-local mappings = require('mappings')
+require('mappings').mappings_go()
 local gotest_cmd = 'go test'
 
 -- tab
@@ -18,12 +18,6 @@ vim.g.go_def_mode='gopls'
 vim.g.go_info_mode='gopls'
 vim.g.go_rename_command = 'gopls'
 vim.g.go_list_type = "quickfix"
-
--- key map for go file
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'go',
-  callback = mappings.mappings_go,
-})
 
 -- GoUnitTest runs go test the function where the cunnrent cursor is on
 -- depends on :Ttoggle (neoterm)

@@ -40,6 +40,7 @@ return require('packer').startup(function(use)
       tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
   use 'machakann/vim-sandwich' -- surround
+  use 'gpanders/editorconfig.nvim' -- editorconfig
   -- lsp
   use 'williamboman/nvim-lsp-installer' -- LSP installer
   use 'neovim/nvim-lspconfig' -- Easy LSP configuration
