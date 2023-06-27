@@ -65,6 +65,9 @@ return require('packer').startup(function(use)
   use 'SirVer/ultisnips'
   use 'quangnguyen30192/cmp-nvim-ultisnips'
 
+  -- copilot
+  use 'github/copilot.vim'
+
   -- To install a new plugin, do PackerUpdate
   
   -- Automatically set up your configuration after cloning packer.nvim
