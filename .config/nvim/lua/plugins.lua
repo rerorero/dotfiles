@@ -54,6 +54,7 @@ return require('packer').startup(function(use)
       require("trouble").setup {}
     end
   } -- show all problems
+  use 'vim-test/vim-test' -- test for Ruby
   -- completion
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'

@@ -138,10 +138,12 @@ export GOPATH=$HOME/go
 export GOPRIVATE=github.com/kouzoh
 
 # for nvm
-# source ~/.nvm/nvm.sh
+source ~/.nvm/nvm.sh
 #
 if which pyenv > /dev/null; then eval "$(pyenv init --path)"; fi
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi #
+# G
+# PATH="$PATH:/Users/rerorero/Library/Python/3.9/bin"
 
 # for nodeenv
 export PATH="$HOME/.nodenv/bin:$HOME/.nodenv/shims:$PATH"
@@ -178,4 +180,9 @@ export GPG_TTY=$TTY
 
 # Android
 export ANDROID_HOME="$HOME/Library/Android/sdk"
-export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
+export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/emulator:$PATH"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# workaround for spring
+# https://github.com/rails/rails/issues/38560
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES

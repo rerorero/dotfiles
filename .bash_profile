@@ -54,10 +54,10 @@ export PATH=$PATH:"/Users/rerorero/.anyenv/bin"
 eval "$(anyenv init -)"
 export PATH="$(brew --prefix php@7.1)/bin:$PATH"
 
-export PATH="$HOME/.cargo/bin:$PATH"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/rerorero/.sdkman"
 [[ -s "/Users/rerorero/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/rerorero/.sdkman/bin/sdkman-init.sh"
 
 export PATH="$HOME/.poetry/bin:$PATH"
+. "$HOME/.cargo/env"

@@ -1,4 +1,4 @@
-local mappings = require('mappings')
+require('mappings').mappings_ruby()
 
 -- tab
 vim.bo.tabstop = 2
