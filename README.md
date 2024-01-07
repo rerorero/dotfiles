@@ -7,18 +7,15 @@ brew install rbenv ruby-build nodenv python3 go golangci-lint gpg ghq peco wget 
 
 ```
 
+#### Ubuntu
+```
+sudo locale-gen en_US.UTF-8
+```
+
 #### zsh
 
 ```
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-```
-
-#### node
-
-```
-nodenv install 16.15.1
-nodenv global 16.15.1
-npm install typescript eslint
 ```
 
 #### nvim

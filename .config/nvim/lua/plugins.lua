@@ -42,7 +42,8 @@ return require('packer').startup(function(use)
   use 'machakann/vim-sandwich' -- surround
   use 'gpanders/editorconfig.nvim' -- editorconfig
   -- lsp
-  use 'williamboman/nvim-lsp-installer' -- LSP installer
+  use 'williamboman/mason.nvim' -- LSP installer
+  use 'williamboman/mason-lspconfig.nvim' -- LSP installer
   use 'neovim/nvim-lspconfig' -- Easy LSP configuration
   use 'fatih/vim-go' -- go plugin besides lsp (gopls)
   use 'j-hui/fidget.nvim' -- show lsp progress

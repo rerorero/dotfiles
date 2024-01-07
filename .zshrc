@@ -35,11 +35,11 @@ alias grep='grep --color'
 
 #alias ssh=ssh-host-color
 
-alias ls="ls -G -w -a"
+alias ls="ls -G -a"
 alias la="ls -a"
 alias lf="ls -F"
-alias ll="ls -alT"
-alias l="ls -alT"
+alias ll="ls -alt"
+alias l="ls -alt"
 alias vi="nvim"
 alias g="git"
 alias ghl='cd $(ghq list -p | peco)'
@@ -81,13 +81,6 @@ alias kn='kns && kubens $NS'
 #zsh-cmpletions
 # autoload -Uz compinit
 # compinit -u
-
-# brew
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# mvn
-export M2_HOME=/usr/local/Cellar/maven/3.5.2
-export JAVA_HOME="/opt/homebrew/opt/openjdk@11/"
 
 # Flink
 export FLINK_HOME="/usr/local/Cellar/apache-flink/1.12.1/libexec"
@@ -132,6 +125,7 @@ export PATH="$HOME/.poetry/bin:$PATH"
 export PATH="$HOME/spark/bin:$PATH"
 export PATH="$HOME/ccloud-cli/bin:$PATH"
 export PATH="$HOME/.poetry/bin:$PATH"
+export PATH="$HOME/.pyenv/bin:$PATH"
 
 # for GO
 export GOPATH=$HOME/go
@@ -142,12 +136,6 @@ source ~/.nvm/nvm.sh
 #
 if which pyenv > /dev/null; then eval "$(pyenv init --path)"; fi
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi #
-# G
-# PATH="$PATH:/Users/rerorero/Library/Python/3.9/bin"
-
-# for nodeenv
-export PATH="$HOME/.nodenv/bin:$HOME/.nodenv/shims:$PATH"
-eval "$(nodenv init -)"
 
 alias anon='$HOME/anonhelper.sh "$@"'
 
@@ -186,3 +174,16 @@ export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin
 # workaround for spring
 # https://github.com/rails/rails/issues/38560
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+
+case `uname -a` in
+  Darwin* )
+    # brew
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    # mvn
+    export M2_HOME=/usr/local/Cellar/maven/3.5.2
+    export JAVA_HOME="/opt/homebrew/opt/openjdk@11/"
+    ;;
+  Linux* )
+    ;;
+esac
