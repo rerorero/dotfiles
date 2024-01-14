@@ -91,9 +91,6 @@ alias kn='kns && kubens $NS'
 # autoload -Uz compinit
 # compinit -u
 
-# brew
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
 # Flink
 export FLINK_HOME="/usr/local/Cellar/apache-flink/1.12.1/libexec"
 
