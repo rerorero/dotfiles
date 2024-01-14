@@ -87,7 +87,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # mvn
 export M2_HOME=/usr/local/Cellar/maven/3.5.2
-export JAVA_HOME="/opt/homebrew/opt/openjdk@11/"
+export JAVA_HOME="/opt/homebrew/opt/openjdk@17/"
 
 # Flink
 export FLINK_HOME="/usr/local/Cellar/apache-flink/1.12.1/libexec"
@@ -96,12 +96,6 @@ export FLINK_HOME="/usr/local/Cellar/apache-flink/1.12.1/libexec"
 # export KUBECONFIG="$KUBECONFIG:`ls $HOME/.kube/config* | tr '\n' ':'`"
 
 source $HOME/.cargo/env
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '~/google-cloud-sdk/path.zsh.inc' ]; then . '~/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '~/google-cloud-sdk/completion.zsh.inc' ]; then . '~/google-cloud-sdk/completion.zsh.inc'; fi
 
 
 # rbenv
@@ -186,3 +180,9 @@ export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin
 # workaround for spring
 # https://github.com/rails/rails/issues/38560
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/rerorero/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/rerorero/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/rerorero/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/rerorero/google-cloud-sdk/completion.zsh.inc'; fi
