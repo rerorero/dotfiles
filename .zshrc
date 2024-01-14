@@ -128,7 +128,7 @@ export PATH="$HOME/.poetry/bin:$PATH"
 export PATH="$HOME/spark/bin:$PATH"
 export PATH="$HOME/ccloud-cli/bin:$PATH"
 export PATH="$HOME/.poetry/bin:$PATH"
-export PATH="$HOME/.pyenv/bin:$PATH"
+# export PATH="$HOME/.pyenv/bin:$PATH"
 
 # for GO
 export GOPATH=$HOME/go
@@ -137,8 +137,9 @@ export GOPRIVATE=github.com/kouzoh
 # for nvm
 source ~/.nvm/nvm.sh
 #
-if which pyenv > /dev/null; then eval "$(pyenv init --path)"; fi
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi #
+# if which pyenv > /dev/null; then eval "$(pyenv init --path)"; fi
+# if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi #
+source "$HOME/.rye/env"
 
 alias anon='$HOME/anonhelper.sh "$@"'
 
