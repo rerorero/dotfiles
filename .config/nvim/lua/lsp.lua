@@ -1,9 +1,20 @@
-local lsp_installer = require("nvim-lsp-installer")
+require("mason").setup()
+local lsp_installer = require("mason-lspconfig")
 local lspconf = require('lspconfig')
 local key_map = require('mappings')
 local util = require "lspconfig/util"
 
 lsp_installer.setup({
+  ensure_installed = {
+    "gopls",
+    "eslint",
+    "golangci_lint_ls",
+    "pyright",
+    "tsserver",
+    "terraformls",
+    "sorbet",
+    "solargraph",
+  },
   automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
 })
 
