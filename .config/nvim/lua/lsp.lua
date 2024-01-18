@@ -48,7 +48,8 @@ local servers = {
 
   pyright = {
     python = {
-      pythonPath = python_path;
+      venvPath = ".",
+      pythonPath = "./.venv/bin/python",
     }
   },
 
