@@ -140,6 +140,7 @@ source ~/.nvm/nvm.sh
 # if which pyenv > /dev/null; then eval "$(pyenv init --path)"; fi
 # if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi #
 source "$HOME/.rye/env"
+alias vv='source ./.venv/bin/activate'
 
 alias anon='$HOME/anonhelper.sh "$@"'
 
@@ -194,5 +195,7 @@ case `uname -a` in
     export JAVA_HOME="/opt/homebrew/opt/openjdk@11/"
     ;;
   Linux* )
+    export PATH=/usr/local/cuda:/usr/local/cuda/bin:$PATH
+    export LD_LIBRARY_PATH=/usr/local/lib:/usr/local/cuda/lib64:$LD_LIBRARY_PATH
     ;;
 esac
