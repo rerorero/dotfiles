@@ -99,6 +99,11 @@ export FLINK_HOME="/usr/local/Cellar/apache-flink/1.12.1/libexec"
 
 source $HOME/.cargo/env
 
+# brew
+if [ -d "/opt/homebrew" ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
@@ -188,8 +193,6 @@ if [ -f '/Users/rerorero/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/
 
 case `uname -a` in
   Darwin* )
-    # brew
-    eval "$(/opt/homebrew/bin/brew shellenv)"
     # mvn
     export M2_HOME=/usr/local/Cellar/maven/3.5.2
     export JAVA_HOME="/opt/homebrew/opt/openjdk@11/"
