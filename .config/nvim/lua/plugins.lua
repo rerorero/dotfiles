@@ -68,6 +68,12 @@ return require('packer').startup(function(use)
 
   -- copilot
   use 'github/copilot.vim'
+  use 'nvim-lua/plenary.nvim' -- required for CopilotChat
+  use 'nvim-treesitter/nvim-treesitter' -- required for CopilotChat
+  use {
+    'CopilotC-Nvim/CopilotChat.nvim',
+    branch = 'canary'
+  }
 
   -- To install a new plugin, do PackerUpdate
   

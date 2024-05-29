@@ -58,6 +58,12 @@ map('n', ',d', '<cmd>Telescope diagnostics<CR>', snr) -- Telescope: diagnostic
 map('n', ',s', '<cmd>Telescope lsp_document_symbols<CR>', snr) -- Telescope: symbols in a file
 map('n', ',S', ':Telescope lsp_workspace_symbols query=', { noremap = true }) -- Telescope: symbols in a project
 map('n', ',r', '<cmd>Telescope lsp_references<CR>', snr) -- Telescope: references
+-- copilot chat
+map('n', ',co', ':CopilotChatToggle<CR>', snr)
+map('v', ',co', ':CopilotChatToggle<CR>', snr)
+map('n', ',cr', ':CopilotChatReset<CR>', snr)
+map('n', ',cp', '<cmd>lua ShowCopilotChatActionPrompt()<CR>', snr)
+map('v', ',cp', '<cmd>lua ShowCopilotChatActionPrompt()<CR>', snr)
 
 local lsp_buf_mappings = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
