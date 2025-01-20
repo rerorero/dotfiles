@@ -73,3 +73,6 @@ fi
 
 TMPPREFIX="${TMPDIR%/}/zsh"
 
+
+# Created by `pipx` on 2024-06-19 12:28:22
+export PATH="$PATH:/Users/rerorero/.local/bin"

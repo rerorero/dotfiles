@@ -10,7 +10,7 @@ lsp_installer.setup({
     "eslint",
     "golangci_lint_ls",
     "pyright",
-    "tsserver",
+    "ts_ls",
     "terraformls",
     "sorbet",
     "solargraph",
@@ -60,7 +60,7 @@ local servers = {
   solargraph = {},
 
   -- typescript
-  tsserver = {},
+  ts_ls = {},
   eslint = {},
 
   -- "rust_analyzer"
