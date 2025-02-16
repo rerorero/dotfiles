@@ -63,7 +63,8 @@
 	name = rerorero
 	# signingkey = 8C9299A8B38DA38C
     # signingkey = BFC6AEF179E34C02
-    signingkey = 1D5F7DD9E38BAA69
+    # signingkey = 1D5F7DD9E38BAA69
+    signingkey = CF5BA24901E6340C
 
 [filter "lfs"]
 	smudge = git-lfs smudge %f
