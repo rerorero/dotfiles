@@ -56,7 +56,9 @@ local servers = {
   terraformls = {},
 
   -- ruby
-  sorbet = {},
+  sorbet = {
+    cmd = { 'srb', 'tc', '--lsp', '--dir', '.' },
+  },
   solargraph = {},
 
   -- typescript

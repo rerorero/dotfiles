@@ -91,13 +91,13 @@ require("lazy").setup({
       "yetone/avante.nvim",
       event = "VeryLazy",
       lazy = false,
-      version = "*", -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+      version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
       opts = {
-        provider = "openai", -- "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
+        provider = "claude", -- "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
         openai = {
-          -- endpoint = "https://api.openai.com/v1",
-          model = "gpt-4o",
-          -- timeout = 30000, -- Timeout in milliseconds
+          -- endpoint = "https://api.anthropic.com",
+          -- model = "claude-3-5-sonnet-20241022",
+          model = "claude-3-7-sonnet-20250219",
           -- temperature = 0,
           -- max_tokens = 4096,
         },

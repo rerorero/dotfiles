@@ -90,8 +90,13 @@ local mappings_ruby = function()
   bmap(0, 'n', 'gt', ':TestNearest<CR>', snr)
 end
 
+local mappings_ts = function()
+  bmap(0, 'n', 'gt', ':TestNearest<CR>', snr)
+end
+
 return {
   lsp_buf_mappings = lsp_buf_mappings,
   mappings_go = mappings_go,
   mappings_ruby = mappings_ruby,
+  mappings_ts = mappings_ts
 }
