@@ -141,6 +141,10 @@ export GOPRIVATE=github.com/kouzoh
 
 # for nvm
 source ~/.nvm/nvm.sh
+
+# for mise
+eval "$(~/.local/bin/mise activate zsh)"
+
 #
 # if which pyenv > /dev/null; then eval "$(pyenv init --path)"; fi
 # if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi #
@@ -217,4 +221,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
