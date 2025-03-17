@@ -55,10 +55,6 @@ require("lazy").setup({
         require("plugin-telescope")
       end,
     },
-    {
-        'nvim-telescope/telescope-project.nvim',
-        dependencies = { 'nvim-telescope/telescope.nvim' },
-    },
     -- terraform
     { "hashivim/vim-terraform" },
     -- lualine
@@ -166,7 +162,6 @@ require("lazy").setup({
           config = {
             header = require("dashboard-header")
           },
-          fotter = {}
         }
       end,
       dependencies = { {'nvim-tree/nvim-web-devicons'}}
