@@ -13,3 +13,4 @@ ln -s ~/go/src/github.com ~/github
 mkdir ~/vimtmp
 mkdir ~/vimbackup
 ln -sf ~/dotfiles/.config/nvim ~/.config/nvim
+ln -sf ~/dotfiles/.claude ~/.claude
