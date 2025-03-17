@@ -1,4 +1,5 @@
 require('general')
+require('dashboard-header')
 require('plugins')
 require('color')
 require('lsp')

@@ -31,7 +31,13 @@ require("lazy").setup({
     -- modify split size
     { "kana/vim-submode" },
     -- show vertical lines at each indentation level
-    { "Yggdroot/indentLine" },
+    {
+      "shellRaining/hlchunk.nvim",
+      event = { "BufReadPre", "BufNewFile" },
+      config = function()
+        require("plugin-hlchunk")
+      end
+    },
     -- resuable terminal
     { "kassio/neoterm" },
     -- The lightning fast fzf fuzzy finder
@@ -42,7 +48,17 @@ require("lazy").setup({
     -- Prettier formatter
     { "prettier/vim-prettier" },
     -- telescope
-    { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+    {
+      "nvim-telescope/telescope.nvim",
+      dependencies = { "nvim-lua/plenary.nvim" },
+      config = function()
+        require("plugin-telescope")
+      end,
+    },
+    {
+        'nvim-telescope/telescope-project.nvim',
+        dependencies = { 'nvim-telescope/telescope.nvim' },
+    },
     -- terraform
     { "hashivim/vim-terraform" },
     -- lualine
@@ -139,7 +155,22 @@ require("lazy").setup({
           ft = { "markdown", "Avante" },
         },
       },
-    }
+    },
+    -- startup
+    {
+      'nvimdev/dashboard-nvim',
+      event = 'VimEnter',
+      config = function()
+        require('dashboard').setup {
+          theme = "hyper",
+          config = {
+            header = require("dashboard-header")
+          },
+          fotter = {}
+        }
+      end,
+      dependencies = { {'nvim-tree/nvim-web-devicons'}}
+    },
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
