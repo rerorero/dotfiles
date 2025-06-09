@@ -64,6 +64,9 @@ map('v', ',co', ':CopilotChatToggle<CR>', snr)
 map('n', ',cr', ':CopilotChatReset<CR>', snr)
 map('n', ',cp', '<cmd>lua ShowCopilotChatActionPrompt()<CR>', snr)
 map('v', ',cp', '<cmd>lua ShowCopilotChatActionPrompt()<CR>', snr)
+-- TComment
+map('n', '<C--><C-->', ':TComment<CR>', snr)
+map('v', '<C--><C-->', ':TComment<CR>', snr)
 
 local lsp_buf_mappings = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions

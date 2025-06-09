@@ -17,7 +17,11 @@ setopt EXTENDED_HISTORY
 # prezto
 ######################################################
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
- source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+  # workaround for claude-code
+  # https://github.com/anthropics/claude-code/issues/783
+  if [[ -z "${CLAUDECODE}" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+  fi
 fi
 
 # PROMPT
