@@ -1,5 +1,9 @@
 [user]
 
+[column]
+    ui = auto
+[branch]
+    sort = committerdate
 [diff]
     tool = "twdiff"
 [difftool]
@@ -58,7 +62,8 @@
 	email = nato9598@hotmail.co.jp
 	name = rerorero
 	# signingkey = 8C9299A8B38DA38C
-    signingkey = BFC6AEF179E34C02
+    # signingkey = BFC6AEF179E34C02
+    signingkey = 1D5F7DD9E38BAA69
 
 [filter "lfs"]
 	smudge = git-lfs smudge %f
@@ -66,7 +71,7 @@
 	clean = git-lfs clean %f
 
 [core]
-    editor = /usr/local/bin/vim
+    editor = vi
     excludesfile = ~/.gitignore
 [ghq]
 	root = ~/go/src
