@@ -18,6 +18,13 @@ sudo locale-gen en_US.UTF-8
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 ```
 
+### node
+```
+nodenv install -l
+nodenv install 22.13.1
+nodenv global 22.13.1
+```
+
 #### nvim
 
 ```
@@ -34,7 +41,10 @@ brew install font-hack-nerd-font
 python3 -m pip install --user --upgrade pynvim
 ```
 
-and do `:PackerInstall`
+```
+:Lazy
+:Copilot setup
+```
 
 #### git
 
@@ -51,6 +61,9 @@ Host github
 ```
 
 - add gpg key
+- Update signingkey in .gitconfig
+
+```
 
 #### Go
 
@@ -72,3 +85,16 @@ For sorbet project
 bundler add sorbet
 bundle exec srb init
 ```
+
+### Other tools
+- 英かな https://ei-kana.appspot.com/
+  - Command_L - 英数
+  - Command_R - かな
+  - ^H - (fn)←
+  - ^J - (fn)↓
+  - ^K - (fn)↑
+  - ^L - (fn)→
+- Alfred https://www.alfredapp.com/
+- Karabiner-Elements https://karabiner-elements.pqrs.org/
+  - caps_lock - left_control
+  - right_option - right_command
