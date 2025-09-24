@@ -1,6 +1,5 @@
 require("mason").setup()
 local lsp_installer = require("mason-lspconfig")
-local lspconf = require('lspconfig')
 local key_map = require('mappings')
 local util = require "lspconfig/util"
 
@@ -82,7 +81,7 @@ for lsp, conf in pairs(servers) do
 
   conf.capabilities = capabilities
 
-  lspconf[lsp].setup(conf)
+  vim.lsp.config(lsp, conf)
 end
 
 -- diagnostics
