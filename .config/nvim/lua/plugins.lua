@@ -113,6 +113,9 @@ require("lazy").setup({
       end,
       dependencies = { {'nvim-tree/nvim-web-devicons'}}
     },
+    -- vim-fugitive
+    { "tpope/vim-fugitive" },
+    { "tpope/vim-rhubarb"  }, -- for github permalink
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.

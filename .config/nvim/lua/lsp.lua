@@ -13,6 +13,7 @@ lsp_installer.setup({
     "terraformls",
     "sorbet",
     "solargraph",
+    "vue_ls",
   },
   automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
 })
@@ -32,7 +33,7 @@ local servers = {
   golangci_lint_ls = {},
 
   gopls = {
-    root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+    -- root_dir = util.root_pattern("go.work", "go.mod", ".git"),
     settings = {
       gopls = {
         analyses = {
@@ -67,7 +68,10 @@ local servers = {
   -- "rust_analyzer"
   
   -- mac/ios
-  sourcekit = {}
+  sourcekit = {},
+
+  -- vue
+  vue_ls = {}
 }
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()

@@ -68,6 +68,10 @@ map('v', ',cp', '<cmd>lua ShowCopilotChatActionPrompt()<CR>', snr)
 map('n', '<C--><C-->', ':TComment<CR>', snr)
 map('v', '<C--><C-->', ':TComment<CR>', snr)
 
+-- GitHub
+map('n', ',l', ':GBrowse<CR>', snr) -- open current file on GitHub
+map('v', ',l', ':GBrowse<CR>', snr) -- open current file on GitHub
+
 local lsp_buf_mappings = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   bmap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', snr)
