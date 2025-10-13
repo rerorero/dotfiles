@@ -152,7 +152,6 @@ eval "$(~/.local/bin/mise activate zsh)"
 #
 # if which pyenv > /dev/null; then eval "$(pyenv init --path)"; fi
 # if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi #
-source "$HOME/.rye/env"
 alias vv='source ./.venv/bin/activate'
 
 alias anon='$HOME/anonhelper.sh "$@"'
@@ -181,7 +180,7 @@ export CLASSPATH=".:/usr/local/lib/antlr-4.9.2-complete.jar:$CLASSPATH"
 alias antlr4='java -jar /usr/local/lib/antlr-4.9.2-complete.jar'
 alias grun='java org.antlr.v4.gui.TestRig'
 
-ssh-add --apple-use-keychain ~/.ssh/id_ed25519_github
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
 export GPG_TTY=$TTY
 
 # Android
@@ -203,7 +202,7 @@ case `uname -a` in
   Darwin* )
     # mvn
     export M2_HOME=/usr/local/Cellar/maven/3.5.2
-    export JAVA_HOME="/opt/homebrew/opt/openjdk@11/"
+    export JAVA_HOME=$(/usr/libexec/java_home)
     ;;
   Linux* )
     export PATH=/usr/local/cuda:/usr/local/cuda/bin:$PATH
@@ -225,3 +224,11 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# zoxide
+eval "$(zoxide init zsh)"
+
+
+# Slack
+alias fixslack='pkill -f "Slack" && sleep 3 && pkill -f "NotificationCenter" && sleep 10 && open -a "Slack"'
+
