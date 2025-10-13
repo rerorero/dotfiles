@@ -62,7 +62,18 @@ local servers = {
   solargraph = {},
 
   -- typescript
-  ts_ls = {},
+  ts_ls = {
+    init_options = {
+      plugins = {
+        {
+          name = "@vue/typescript-plugin",
+          location = "",
+          languages = { "vue" },
+        }
+      }
+    },
+    filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+  },
   eslint = {},
 
   -- "rust_analyzer"
