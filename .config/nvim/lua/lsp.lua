@@ -14,6 +14,7 @@ lsp_installer.setup({
     "sorbet",
     "solargraph",
     "vue_ls",
+    "protols",
   },
   automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
 })
@@ -82,7 +83,10 @@ local servers = {
   sourcekit = {},
 
   -- vue
-  vue_ls = {}
+  vue_ls = {},
+
+  -- proto
+  protols = {},
 }
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
