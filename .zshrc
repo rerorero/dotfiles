@@ -79,6 +79,8 @@ alias dc="docker compose"
 
 #vimrc
 alias vimrc="vim ~/.vimrc"
+export EDITOR='nvim'
+export VISUAL='nvim'
 
 # kubernetes
 alias k='kubectl'
