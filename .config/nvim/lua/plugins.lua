@@ -41,8 +41,9 @@ require("lazy").setup({
     -- resuable terminal
     { "kassio/neoterm" },
     -- The lightning fast fzf fuzzy finder
-    { "junegunn/fzf", build = "./install --all" },
-    { "junegunn/fzf.vim" },
+    -- { "ibhagwan/fzf-lua" },
+    -- { "junegunn/fzf", build = "./install --all" },
+    -- { "junegunn/fzf.vim" },
     -- easy motion
     { "easymotion/vim-easymotion" },
     -- Prettier formatter
@@ -52,7 +53,7 @@ require("lazy").setup({
       "nvim-telescope/telescope.nvim",
       dependencies = { "nvim-lua/plenary.nvim" },
       config = function()
-        require("plugin-telescope")
+       require("plugin-telescope")
       end,
     },
     -- terraform

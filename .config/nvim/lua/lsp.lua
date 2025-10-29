@@ -15,6 +15,7 @@ lsp_installer.setup({
     "solargraph",
     "vue_ls",
     "protols",
+    "jdtls",
   },
   automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
 })
@@ -87,6 +88,9 @@ local servers = {
 
   -- proto
   protols = {},
+
+  -- java
+  jdtls = {},
 }
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()

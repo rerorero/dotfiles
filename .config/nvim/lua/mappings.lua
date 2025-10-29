@@ -51,13 +51,13 @@ map('n', '<space><space>', '<Plug>(easymotion-overwin-f)', {}) -- easymotion
 map('n', '<space>d', '<cmd>TroubleToggle<CR>', snr) -- show/hide trables
 map('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', snr)
 
-map('n', ',g', ':Rg<Space>', { noremap = true }) -- grep
+-- map('n', ',g', ':Rg<Space>', { noremap = true }) -- grep
+map('n', ',g', '<cmd>Telescope live_grep<CR>', snr)
 map('n', ',b', '<cmd>Telescope buffers<CR>', snr) -- Telescope: buffers
 map('n', ',f', '<cmd>Telescope find_files<CR>', snr) -- Telescope: buffers
 map('n', ',d', '<cmd>Telescope diagnostics<CR>', snr) -- Telescope: diagnostic
 map('n', ',s', '<cmd>Telescope lsp_document_symbols<CR>', snr) -- Telescope: symbols in a file
 map('n', ',S', ':Telescope lsp_workspace_symbols query=', { noremap = true }) -- Telescope: symbols in a project
-map('n', ',r', '<cmd>Telescope lsp_references<CR>', snr) -- Telescope: references
 -- copilot chat
 map('n', ',co', ':CopilotChatToggle<CR>', snr)
 map('v', ',co', ':CopilotChatToggle<CR>', snr)
@@ -80,7 +80,10 @@ local lsp_buf_mappings = function(client, bufnr)
   bmap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', snr)
   bmap(bufnr, 'n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', snr)
   bmap(bufnr, 'n', 'gn', '<cmd>lua vim.lsp.buf.rename()<CR>', snr)
+  bmap(bufnr, 'n', 'gi', '<cmd>Telescope lsp_implementations<CR>', snr)
   bmap(bufnr, 'n', 'gr', '<cmd>Telescope lsp_references<CR>', snr)
+  bmap(bufnr, 'n', 'gci', '<cmd>Telescope lsp_incoming_calls<CR>', snr)
+  bmap(bufnr, 'n', 'gco', '<cmd>Telescope lsp_outgoing_calls<CR>', snr)
   bmap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', snr)
 end
 
