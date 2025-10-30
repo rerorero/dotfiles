@@ -41,9 +41,19 @@ require("lazy").setup({
     -- resuable terminal
     { "kassio/neoterm" },
     -- The lightning fast fzf fuzzy finder
-    -- { "ibhagwan/fzf-lua" },
-    -- { "junegunn/fzf", build = "./install --all" },
-    -- { "junegunn/fzf.vim" },
+    {
+      "ibhagwan/fzf-lua",
+      config = function()
+        require('fzf-lua').setup({
+          winopts = {
+            preview = {
+              layout = "vertical",
+              vertical = "up:70%",
+            },
+          },
+        })
+      end,
+    },
     -- easy motion
     { "easymotion/vim-easymotion" },
     -- Prettier formatter

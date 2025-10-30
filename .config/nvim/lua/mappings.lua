@@ -51,8 +51,7 @@ map('n', '<space><space>', '<Plug>(easymotion-overwin-f)', {}) -- easymotion
 map('n', '<space>d', '<cmd>TroubleToggle<CR>', snr) -- show/hide trables
 map('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', snr)
 
--- map('n', ',g', ':Rg<Space>', { noremap = true }) -- grep
-map('n', ',g', '<cmd>Telescope live_grep<CR>', snr)
+map('n', ',g', ':FzfLua grep<CR>', { noremap = true }) -- grep
 map('n', ',b', '<cmd>Telescope buffers<CR>', snr) -- Telescope: buffers
 map('n', ',f', '<cmd>Telescope find_files<CR>', snr) -- Telescope: buffers
 map('n', ',d', '<cmd>Telescope diagnostics<CR>', snr) -- Telescope: diagnostic
