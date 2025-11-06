@@ -2,6 +2,15 @@ local wezterm = require 'wezterm'
 
 local config = wezterm.config_builder()
 
+-- window settings
+config.window_decorations = "RESIZE"
+config.window_background_opacity = 0.7
+config.text_background_opacity = 0.9
+-- config.macos_window_background_blur = 20
+
+-- tab bar settings
+config.show_close_tab_button_in_tabs = false
+
 -- Font and color scheme
 config.font = wezterm.font_with_fallback {
   { family = 'Moralerspace Neon', weight = 'Bold' },
