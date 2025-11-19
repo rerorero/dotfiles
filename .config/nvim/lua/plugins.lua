@@ -109,7 +109,7 @@ require("lazy").setup({
     { "SirVer/ultisnips" },
     { "quangnguyen30192/cmp-nvim-ultisnips" },
     -- copilot
-    { "github/copilot.vim" },
+    -- { "github/copilot.vim" },
     -- startup
     {
       'nvimdev/dashboard-nvim',
@@ -127,6 +127,18 @@ require("lazy").setup({
     -- vim-fugitive
     { "tpope/vim-fugitive" },
     { "tpope/vim-rhubarb"  }, -- for github permalink
+    -- flutter
+    {
+      'nvim-flutter/flutter-tools.nvim',
+      lazy = false,
+      dependencies = {
+          'nvim-lua/plenary.nvim',
+          'stevearc/dressing.nvim', -- optional for vim.ui.select
+      },
+      config = function()
+        require("plugin-flutter")
+      end
+    }
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
