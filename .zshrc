@@ -234,3 +234,12 @@ eval "$(zoxide init zsh)"
 # Slack
 alias fixslack='pkill -f "Slack" && sleep 3 && pkill -f "NotificationCenter" && sleep 10 && open -a "Slack"'
 
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /Users/ryo.natori.001/.dart-cli-completion/zsh-config.zsh ]] && . /Users/ryo.natori.001/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
+export PATH="$PATH":"$HOME/fvm/default/bin"
+
+alias tmp='vi ~/tmp'
