@@ -110,6 +110,8 @@ require("lazy").setup({
     { "quangnguyen30192/cmp-nvim-ultisnips" },
     -- copilot
     -- { "github/copilot.vim" },
+    -- Google AI Studio / Geimini Code Assist (code complete)
+    -- { 'flyingshutter/gemini-autocomplete.nvim', opts = {} },
     -- startup
     {
       'nvimdev/dashboard-nvim',
@@ -138,6 +140,11 @@ require("lazy").setup({
       config = function()
         require("plugin-flutter")
       end
+    },
+    -- markdown preview
+    {
+      'OXY2DEV/markview.nvim',
+      lazy = false,
     }
   },
   -- Configure any other settings here. See the documentation for more details.
