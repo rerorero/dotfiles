@@ -58,6 +58,7 @@ alias g="git"
 alias ghl='cd $(ghq list -p | peco)'
 alias ghg='ghq get'
 alias gho='git-open'
+alias gbc='git-branch-cleanup'
 alias cio='open https://circleci.com/gh/$(git remote get-url --push origin | sed -e "s/github.com://")/tree/$(git rev-parse --abbrev-ref HEAD)'
 alias t="tig"
 # export GIT_SSH_COMMAND="ssh -i $HOME/.ssh/id_ed25519_github -o IdentitiesOnly=yes"
@@ -127,6 +128,7 @@ export PATH="$PATH:$HOME/go/bin:"
 export RUST_SRC_PATH=~/rust/rust/src
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export PATH="$PATH:$HOME/pear/bin/"
+export PATH="$HOME/dotfiles/bin:$PATH"
 export PATH="$HOME/.tfenv/bin:$PATH"
 export PATH="/usr/local/opt/php@7.3/bin:$PATH"
 export PATH="/usr/local/opt/php@7.3/sbin:$PATH"
