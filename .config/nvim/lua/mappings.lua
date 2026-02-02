@@ -6,8 +6,8 @@ map('n', '<C-a>', '0', snr) -- emulate mac shortcut: move to head
 map('n', '<C-e>', '$', snr) -- emulate mac shortcut: move to tail
 -- map('n', '<C-f>', ':NERDTreeToggle<CR>', snr) -- nerdtree: toggle
 map('n', '<C-f>', ':NvimTreeToggle<CR>', snr) -- nvim-tree: toggle
-map('n', '<C-m>', '<cmd>lua vim.diagnostic.goto_prev()<CR>', snr)
-map('n', '<C-n>', '<cmd>lua vim.diagnostic.goto_next()<CR>', snr)
+map('n', '<C-m>', '<cmd>lua vim.diagnostic.jump({count= -1, float = true})<CR>', snr)
+map('n', '<C-n>', '<cmd>lua vim.diagnostic.jump({count= 1, float = true})<CR>', snr)
 map('n', '<C-s>', '<cmd>SymbolsOutline<CR>', snr) -- show symbols outline
 map('n', '<C-t><C-g>', ':1Ttoggle<CR>', snr) -- neoterm
 map('n', '<C-t><C-r>', ':2Ttoggle<CR>', snr) -- neoterm

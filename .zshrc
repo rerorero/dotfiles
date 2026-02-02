@@ -243,3 +243,4 @@ alias fixslack='pkill -f "Slack" && sleep 3 && pkill -f "NotificationCenter" && 
 export PATH="$PATH":"$HOME/fvm/default/bin"
 
 alias tmp='vi ~/tmp'
+alias db='sqlit'

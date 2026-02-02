@@ -1,3 +1,1 @@
-
-## Coding
-- Include the “why” in code comments. If the code’s purpose is obvious, comments aren’t needed.
+- Claude Codeがタスクを実行してその結果をファイルに出力する場合、`./z` ディレクトリに入れること。
