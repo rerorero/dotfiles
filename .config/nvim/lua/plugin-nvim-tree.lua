@@ -50,7 +50,12 @@ local function my_on_attach(bufnr)
   vim.keymap.set("n", "L",              api.node.open.toggle_group_empty,   opts("Toggle Group Empty"))
   -- vim.keymap.set("n", "M",              api.tree.toggle_no_bookmark_filter, opts("Toggle Filter: No Bookmark"))
   -- vim.keymap.set("n", "m",              api.marks.toggle,                   opts("Toggle Bookmark"))
-  vim.keymap.set("n", "o",              api.node.open.edit,                 opts("Open"))
+  vim.keymap.set("n", "o", function()
+    local node = api.tree.get_node_under_cursor()
+    if node then
+      vim.fn.jobstart({ "open", node.absolute_path }, { detach = true })
+    end
+  end, opts("Open: System"))
   vim.keymap.set("n", "O",              api.node.open.no_window_picker,     opts("Open: No Window Picker"))
   vim.keymap.set("n", "p",              api.fs.paste,                       opts("Paste"))
   -- vim.keymap.set("n", "P",              api.node.navigate.parent,           opts("Parent Directory"))
