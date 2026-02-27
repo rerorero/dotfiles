@@ -246,3 +246,6 @@ export PATH="$PATH":"$HOME/fvm/default/bin"
 
 alias tmp='vi ~/tmp'
 alias db='sqlit'
+
+# git
+eval "$(git wt --init zsh)"

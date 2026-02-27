@@ -1,0 +1,37 @@
+#!/bin/bash
+
+CMUX=/Applications/cmux.app/Contents/Resources/bin/cmux
+
+if [ $# -eq 0 ]; then
+  read -p "Workspace name: " NAME
+  DIR=$(zoxide query --interactive) || exit 1
+  [ -z "$DIR" ] && exit 1
+  read -p "Claude options (optional): " CLAUDE_OPTS
+elif [ $# -lt 2 ]; then
+  echo "Usage: new <name> <dir> [claude options...]"
+  echo "       new  (interactive)"
+  echo ""
+  echo "Examples:"
+  echo "  new \"作業\" . --continue --model claude-opus-4-6"
+  exit 1
+else
+  NAME="$1"
+  DIR="$2"
+  shift 2
+  CLAUDE_OPTS="$*"
+fi
+
+if [ ! -S /tmp/cmux.sock ]; then
+  open -g /Applications/cmux.app
+  for i in {1..20}; do
+    [ -S /tmp/cmux.sock ] && break
+    sleep 0.5
+  done
+fi
+
+set -eux
+
+WS=$($CMUX new-workspace | sed 's/^OK //')
+$CMUX rename-workspace --workspace "$WS" "$NAME"
+$CMUX send --workspace "$WS" "cd '$DIR' && claude $CLAUDE_OPTS"$'\n'
+$CMUX select-workspace --workspace "$WS"
