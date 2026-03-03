@@ -33,5 +33,6 @@ set -eux
 
 WS=$($CMUX new-workspace | sed 's/^OK //')
 $CMUX rename-workspace --workspace "$WS" "$NAME"
-$CMUX send --workspace "$WS" "cd '$DIR' && claude $CLAUDE_OPTS"$'\n'
+$CMUX send --workspace "$WS" "cd '$DIR'"$'\n'
+$CMUX send --workspace "$WS" "claude $CLAUDE_OPTS"$'\n'
 $CMUX select-workspace --workspace "$WS"
